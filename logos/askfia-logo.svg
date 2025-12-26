@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="ask-circle-clip">
+      <circle cx="100" cy="100" r="95"/>
+    </clipPath>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="95" fill="#006D6D"/>
+  
+  <!-- Tree rings - subtle base -->
+  <circle cx="100" cy="100" r="75" fill="none" stroke="#008B8B" stroke-width="2" opacity="0.3"/>
+  <circle cx="100" cy="100" r="50" fill="none" stroke="#008B8B" stroke-width="2" opacity="0.2"/>
+  
+  <!-- Speech bubble / question mark combination -->
+  <g transform="translate(100, 95)">
+    <!-- Speech bubble outline -->
+    <path d="M -40 -40 
+             Q -40 -55, -25 -55 
+             L 25 -55 
+             Q 40 -55, 40 -40 
+             L 40 5 
+             Q 40 20, 25 20 
+             L 5 20 
+             L -5 35 
+             L -5 20 
+             L -25 20 
+             Q -40 20, -40 5 
+             Z" 
+          fill="none" stroke="#20B2AA" stroke-width="3"/>
+    
+    <!-- Question mark inside bubble -->
+    <text x="0" y="0" font-family="Georgia, serif" font-size="42" font-weight="700" fill="#20B2AA" text-anchor="middle">?</text>
+  </g>
+  
+  <!-- Data/connection nodes around the bubble -->
+  <circle cx="45" cy="55" r="5" fill="#20B2AA" opacity="0.7"/>
+  <circle cx="155" cy="55" r="5" fill="#20B2AA" opacity="0.7"/>
+  <circle cx="45" cy="145" r="5" fill="#20B2AA" opacity="0.7"/>
+  <circle cx="155" cy="145" r="5" fill="#20B2AA" opacity="0.7"/>
+  
+  <!-- Connection lines to nodes -->
+  <line x1="60" y1="65" x2="50" y2="58" stroke="#20B2AA" stroke-width="1.5" opacity="0.5"/>
+  <line x1="140" y1="65" x2="150" y2="58" stroke="#20B2AA" stroke-width="1.5" opacity="0.5"/>
+  <line x1="60" y1="135" x2="50" y2="142" stroke="#20B2AA" stroke-width="1.5" opacity="0.5"/>
+  <line x1="140" y1="135" x2="150" y2="142" stroke="#20B2AA" stroke-width="1.5" opacity="0.5"/>
+</svg>

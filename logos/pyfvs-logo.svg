@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="fvs-circle-clip">
+      <circle cx="100" cy="100" r="95"/>
+    </clipPath>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="95" fill="#8B6914"/>
+  
+  <!-- Tree rings - base structure -->
+  <circle cx="100" cy="100" r="80" fill="none" stroke="#B8860B" stroke-width="2" opacity="0.4"/>
+  <circle cx="100" cy="100" r="55" fill="none" stroke="#B8860B" stroke-width="2" opacity="0.3"/>
+  <circle cx="100" cy="100" r="30" fill="none" stroke="#B8860B" stroke-width="2" opacity="0.2"/>
+  
+  <!-- Growth curves - Chapman-Richards style sigmoid curves -->
+  <g clip-path="url(#fvs-circle-clip)">
+    <!-- Growth curve 1 - height over time -->
+    <path d="M 20 180 Q 60 170, 80 140 Q 100 100, 120 70 Q 150 30, 180 20" 
+          fill="none" stroke="#FFD700" stroke-width="3" opacity="0.8"/>
+    
+    <!-- Growth curve 2 - diameter -->
+    <path d="M 25 175 Q 55 168, 85 150 Q 110 125, 135 95 Q 160 60, 185 45" 
+          fill="none" stroke="#FFD700" stroke-width="2.5" opacity="0.6"/>
+    
+    <!-- Growth curve 3 - volume -->
+    <path d="M 30 170 Q 50 165, 90 155 Q 120 140, 150 110 Q 170 80, 190 65" 
+          fill="none" stroke="#FFD700" stroke-width="2" opacity="0.4"/>
+  </g>
+  
+  <!-- Tree silhouette in center -->
+  <g transform="translate(100, 100)">
+    <!-- Trunk -->
+    <rect x="-4" y="0" width="8" height="25" fill="#FFD700" opacity="0.9"/>
+    <!-- Canopy layers -->
+    <polygon points="0,-35 -20,0 20,0" fill="#FFD700" opacity="0.9"/>
+    <polygon points="0,-25 -15,5 15,5" fill="#FFD700" opacity="0.7"/>
+    <polygon points="0,-15 -10,10 10,10" fill="#FFD700" opacity="0.5"/>
+  </g>
+</svg>

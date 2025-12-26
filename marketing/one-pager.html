@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FIAtools One-Pager</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;600;700&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: letter;
+      margin: 0.5in;
+    }
+    
+    :root {
+      --pyfia: #2D5016;
+      --gridfia: #1B7C74;
+      --pyfvs: #8B6914;
+      --askfia: #006D6D;
+      --text: #1a1a1a;
+      --text-light: #4a4a4a;
+      --bg: #fafaf8;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'IBM Plex Sans', system-ui, sans-serif;
+      background: white;
+      color: var(--text);
+      line-height: 1.5;
+      max-width: 8.5in;
+      margin: 0 auto;
+      padding: 0.5in;
+    }
+    
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 3px solid var(--pyfia);
+    }
+    
+    .logo-section h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    
+    .logo-section h1 span {
+      font-weight: 300;
+    }
+    
+    .logo-section .tagline {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--text-light);
+    }
+    
+    .contact-info {
+      text-align: right;
+      font-size: 0.85rem;
+    }
+    
+    .contact-info a {
+      color: var(--pyfia);
+      text-decoration: none;
+    }
+    
+    /* Main content grid */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    
+    /* Problem/Solution section */
+    .intro-section {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background: var(--bg);
+      border-radius: 4px;
+    }
+    
+    .intro-section h2 {
+      font-size: 1rem;
+      font-family: 'IBM Plex Mono', monospace;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .intro-section p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    
+    /* Tools grid */
+    .tools-section {
+      grid-column: 1 / -1;
+    }
+    
+    .tools-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    
+    .tool-card {
+      padding: 1rem;
+      border-radius: 4px;
+      border: 1px solid #e0e0e0;
+      position: relative;
+    }
+    
+    .tool-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      border-radius: 4px 4px 0 0;
+    }
+    
+    .tool-card.pyfia::before { background: var(--pyfia); }
+    .tool-card.gridfia::before { background: var(--gridfia); }
+    .tool-card.pyfvs::before { background: var(--pyfvs); }
+    .tool-card.askfia::before { background: var(--askfia); }
+    
+    .tool-card h3 {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+    
+    .tool-card .role {
+      font-size: 0.75rem;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+    }
+    
+    .tool-card p {
+      font-size: 0.8rem;
+      line-height: 1.5;
+    }
+    
+    /* Features section */
+    .features-section {
+      padding: 1rem;
+      background: var(--bg);
+      border-radius: 4px;
+    }
+    
+    .features-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    .features-list {
+      list-style: none;
+    }
+    
+    .features-list li {
+      font-size: 0.85rem;
+      padding: 0.4rem 0;
+      padding-left: 1.25rem;
+      position: relative;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .features-list li:last-child {
+      border-bottom: none;
+    }
+    
+    .features-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--pyfia);
+      font-weight: bold;
+    }
+    
+    /* Stats section */
+    .stats-section {
+      padding: 1rem;
+      border: 2px solid var(--pyfia);
+      border-radius: 4px;
+    }
+    
+    .stats-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    
+    .stat {
+      text-align: center;
+      padding: 0.5rem;
+    }
+    
+    .stat-value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--pyfia);
+    }
+    
+    .stat-label {
+      font-size: 0.7rem;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    
+    /* Use cases section */
+    .use-cases {
+      grid-column: 1 / -1;
+      margin-top: 0.5rem;
+    }
+    
+    .use-cases h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    .use-cases-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    
+    .use-case {
+      padding: 0.75rem;
+      background: var(--bg);
+      border-radius: 4px;
+    }
+    
+    .use-case h4 {
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+    }
+    
+    .use-case p {
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+    
+    /* Footer */
+    footer {
+      grid-column: 1 / -1;
+      margin-top: 1rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+    
+    footer .links {
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    
+    footer .links a {
+      color: var(--pyfia);
+      text-decoration: none;
+      margin-left: 1.5rem;
+    }
+    
+    footer .affiliation {
+      color: var(--text-light);
+    }
+    
+    /* QR code placeholder */
+    .qr-code {
+      width: 60px;
+      height: 60px;
+      border: 1px solid #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      color: #999;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-section">
+      <h1>FIA<span>tools</span></h1>
+      <p class="tagline">Python ecosystem for forest inventory analysis</p>
+    </div>
+    <div class="contact-info">
+      <strong>Chris Mihiar, Ph.D.</strong><br>
+      Research Economist<br>
+      <a href="mailto:chris.mihiar@usda.gov">chris.mihiar@usda.gov</a><br>
+      <a href="https://github.com/mihiarc">github.com/mihiarc</a>
+    </div>
+  </header>
+  
+  <div class="content-grid">
+    <div class="intro-section">
+      <div>
+        <h2>The Challenge</h2>
+        <p>Working with USDA Forest Service FIA data requires navigating complex database schemas, understanding statistical estimation procedures, and integrating spatial and tabular data sources. Existing tools like EVALIDator provide web interfaces but lack programmatic access for reproducible research workflows.</p>
+      </div>
+      <div>
+        <h2>The Solution</h2>
+        <p>FIAtools provides a unified Python ecosystem that wraps FIA data in modern, high-performance APIs. From survey plot analysis to spatial biomass mapping to growth simulation—all with consistent interfaces, proper statistical methods, and 10-100× faster performance than existing alternatives.</p>
+      </div>
+    </div>
+    
+    <div class="tools-section">
+      <h2>Four Tools, One Ecosystem</h2>
+      <div class="tools-grid">
+        <div class="tool-card pyfia">
+          <h3>pyFIA</h3>
+          <div class="role">Data Foundation</div>
+          <p>High-performance API for FIA survey data. DuckDB + Polars backend. EVALIDator-compatible statistics.</p>
+        </div>
+        <div class="tool-card gridfia">
+          <h3>gridFIA</h3>
+          <div class="role">Spatial Analysis</div>
+          <p>BIGMAP raster processing. Zarr-based storage for 327 species at 30m resolution. Diversity indices.</p>
+        </div>
+        <div class="tool-card pyfvs">
+          <h3>pyFVS</h3>
+          <div class="role">Growth Modeling</div>
+          <p>Python FVS (Southern variant). Individual tree growth for loblolly, shortleaf, longleaf, slash pine.</p>
+        </div>
+        <div class="tool-card askfia">
+          <h3>askFIA</h3>
+          <div class="role">AI Interface</div>
+          <p>Natural language queries. Conversational access to the entire FIAtools ecosystem.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="features-section">
+      <h2>Key Features</h2>
+      <ul class="features-list">
+        <li>Exact statistical compatibility with EVALIDator</li>
+        <li>Post-stratified estimation with proper variance</li>
+        <li>DuckDB columnar storage for fast queries</li>
+        <li>Cloud-optimized Zarr for spatial data</li>
+        <li>EVALID-based temporal filtering</li>
+        <li>Chapman-Richards growth equations</li>
+        <li>MIT licensed, open source</li>
+        <li>Comprehensive documentation</li>
+      </ul>
+    </div>
+    
+    <div class="stats-section">
+      <h2>By the Numbers</h2>
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="stat-value">327</div>
+          <div class="stat-label">Tree Species</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">30m</div>
+          <div class="stat-label">Raster Resolution</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">212K</div>
+          <div class="stat-label">FIA Plots</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">100×</div>
+          <div class="stat-label">Faster Queries</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="use-cases">
+      <h2>Use Cases</h2>
+      <div class="use-cases-grid">
+        <div class="use-case">
+          <h4>Carbon Accounting</h4>
+          <p>Estimate forest carbon stocks at state, county, or custom regional scales with proper uncertainty quantification.</p>
+        </div>
+        <div class="use-case">
+          <h4>Timber Supply Analysis</h4>
+          <p>Project future timber availability using pyFVS growth models initialized from current FIA inventory data.</p>
+        </div>
+        <div class="use-case">
+          <h4>Biodiversity Assessment</h4>
+          <p>Calculate species richness, Shannon diversity, and biomass distributions using gridFIA spatial analysis.</p>
+        </div>
+      </div>
+    </div>
+    
+    <footer>
+      <div class="affiliation">USDA Forest Service · Southern Research Station · Research Triangle Park, NC</div>
+      <div class="links">
+        <a href="https://github.com/mihiarc/pyfia">pyFIA</a>
+        <a href="https://github.com/mihiarc/gridfia">gridFIA</a>
+        <a href="https://github.com/mihiarc/pyfvs">pyFVS</a>
+        <a href="https://mihiarc.github.io/pyfia/">Docs</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
