@@ -8,7 +8,7 @@ Use this header block at the top of each repository's README to create visual co
 
 ```markdown
 <div align="center">
-  <img src="https://raw.githubusercontent.com/mihiarc/fiatools-branding/main/logos/pyfia-logo.svg" alt="pyFIA" width="120">
+  <img src="https://raw.githubusercontent.com/mihiarc/fiatools/main/logos/pyfia_logo.png" alt="pyFIA" width="120">
   
   # pyFIA
   
@@ -28,7 +28,7 @@ Use this header block at the top of each repository's README to create visual co
 
 ```markdown
 <div align="center">
-  <img src="https://raw.githubusercontent.com/mihiarc/fiatools-branding/main/logos/gridfia-logo.svg" alt="gridFIA" width="120">
+  <img src="https://raw.githubusercontent.com/mihiarc/fiatools/main/logos/gridfia_logo.png" alt="gridFIA" width="120">
   
   # gridFIA
   
@@ -47,7 +47,7 @@ Use this header block at the top of each repository's README to create visual co
 
 ```markdown
 <div align="center">
-  <img src="https://raw.githubusercontent.com/mihiarc/fiatools-branding/main/logos/pyfvs-logo.svg" alt="pyFVS" width="120">
+  <img src="https://raw.githubusercontent.com/mihiarc/fiatools/main/logos/pyfvs_logo.png" alt="pyFVS" width="120">
   
   # pyFVS
   
@@ -66,7 +66,7 @@ Use this header block at the top of each repository's README to create visual co
 
 ```markdown
 <div align="center">
-  <img src="https://raw.githubusercontent.com/mihiarc/fiatools-branding/main/logos/askfia-logo.svg" alt="askFIA" width="120">
+  <img src="https://raw.githubusercontent.com/mihiarc/fiatools/main/logos/askfia_logo.png" alt="askFIA" width="120">
   
   # askFIA
   
