@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://fiatools.org/logos/fiatools-logo.svg" alt="FIAtools" width="320">
+  <img src="https://fiatools.org/logos/fiatools_logo.png" alt="FIAtools" width="320">
   
   <h1>FIAtools</h1>
   
@@ -20,28 +20,28 @@ FIAtools is a unified Python ecosystem for working with USDA Forest Service Fore
     <tr>
       <td align="center" width="25%">
         <a href="https://github.com/mihiarc/pyfia">
-          <img src="https://fiatools.org/logos/pyfia-logo.svg" width="80"><br>
+          <img src="https://fiatools.org/logos/pyfia_logo.png" width="80"><br>
           <strong>pyFIA</strong><br>
           <sub>Data Foundation</sub>
         </a>
       </td>
       <td align="center" width="25%">
         <a href="https://github.com/mihiarc/gridfia">
-          <img src="https://fiatools.org/logos/gridfia-logo.svg" width="80"><br>
+          <img src="https://fiatools.org/logos/gridfia_logo.png" width="80"><br>
           <strong>gridFIA</strong><br>
           <sub>Spatial Analysis</sub>
         </a>
       </td>
       <td align="center" width="25%">
         <a href="https://github.com/mihiarc/pyfvs">
-          <img src="https://fiatools.org/logos/pyfvs-logo.svg" width="80"><br>
+          <img src="https://fiatools.org/logos/pyfvs_logo.png" width="80"><br>
           <strong>pyFVS</strong><br>
           <sub>Growth Modeling</sub>
         </a>
       </td>
       <td align="center" width="25%">
         <a href="https://github.com/mihiarc/askfia">
-          <img src="https://fiatools.org/logos/askfia-logo.svg" width="80"><br>
+          <img src="https://fiatools.org/logos/askfia_logo.png" width="80"><br>
           <strong>askFIA</strong><br>
           <sub>AI Interface</sub>
         </a>
@@ -174,7 +174,7 @@ fiatools/
 ├── gridfia/         # Spatial analysis (submodule)
 ├── pyfvs/           # Growth modeling (submodule)
 ├── askfia/          # AI interface (submodule)
-├── logos/           # SVG logos for all tools
+├── logos/           # PNG logos for all tools
 ├── landing-page/    # fiatools.org source
 ├── marketing/       # Conference materials
 └── docs-templates/  # README headers, citations, brand guide
