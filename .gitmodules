@@ -1,0 +1,12 @@
+[submodule "askfia"]
+	path = askfia
+	url = git@github.com:mihiarc/askfia.git
+[submodule "gridfia"]
+	path = gridfia
+	url = git@github.com:mihiarc/gridfia.git
+[submodule "pyfia"]
+	path = pyfia
+	url = git@github.com:mihiarc/pyfia.git
+[submodule "pyfvs"]
+	path = pyfvs
+	url = git@github.com:mihiarc/pyfvs.git
