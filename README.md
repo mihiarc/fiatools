@@ -1,83 +1,211 @@
-# FIAtools Branding Package
+<div align="center">
+  <img src="https://fiatools.org/logos/fiatools-logo.svg" alt="FIAtools" width="320">
+  
+  <h1>FIAtools</h1>
+  
+  <p><strong>Python ecosystem for forest inventory analysis</strong></p>
+  
+  <p>
+    <a href="https://fiatools.org"><img src="https://img.shields.io/badge/website-fiatools.org-2D5016" alt="Website"></a>
+    <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-2D5016" alt="License: MIT"></a>
+  </p>
+</div>
 
-This package contains all branding assets, templates, and guidelines for the FIAtools Python ecosystem.
+---
 
-## Contents
+FIAtools is a unified Python ecosystem for working with USDA Forest Service Forest Inventory and Analysis (FIA) data. From raw survey plots to growth projections to spatial analysis—all with consistent interfaces and proper statistical methods.
 
-```
-fia-branding/
-├── logos/
-│   ├── fiatools-logo.svg      # Unified ecosystem logo
-│   ├── pyfia-logo.svg         # pyFIA tool logo
-│   ├── gridfia-logo.svg       # gridFIA tool logo
-│   ├── pyfvs-logo.svg         # pyFVS tool logo
-│   └── askfia-logo.svg        # askFIA tool logo
-│
-├── landing-page/
-│   └── index.html             # Complete landing page (deploy to GitHub Pages)
-│
-├── marketing/
-│   └── one-pager.html         # Conference/presentation one-pager (print to PDF)
-│
-├── docs-templates/
-│   ├── README-HEADERS.md      # Copy-paste headers for each repo
-│   ├── CITATION-GUIDE.md      # BibTeX citations for publications
-│   └── BRAND-GUIDELINES.md    # Full brand guide
-│
-└── README.md                  # This file
-```
+<div align="center">
+  <table>
+    <tr>
+      <td align="center" width="25%">
+        <a href="https://github.com/mihiarc/pyfia">
+          <img src="https://fiatools.org/logos/pyfia-logo.svg" width="80"><br>
+          <strong>pyFIA</strong><br>
+          <sub>Data Foundation</sub>
+        </a>
+      </td>
+      <td align="center" width="25%">
+        <a href="https://github.com/mihiarc/gridfia">
+          <img src="https://fiatools.org/logos/gridfia-logo.svg" width="80"><br>
+          <strong>gridFIA</strong><br>
+          <sub>Spatial Analysis</sub>
+        </a>
+      </td>
+      <td align="center" width="25%">
+        <a href="https://github.com/mihiarc/pyfvs">
+          <img src="https://fiatools.org/logos/pyfvs-logo.svg" width="80"><br>
+          <strong>pyFVS</strong><br>
+          <sub>Growth Modeling</sub>
+        </a>
+      </td>
+      <td align="center" width="25%">
+        <a href="https://github.com/mihiarc/askfia">
+          <img src="https://fiatools.org/logos/askfia-logo.svg" width="80"><br>
+          <strong>askFIA</strong><br>
+          <sub>AI Interface</sub>
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>
 
-## Quick Start
+## The Tools
 
-### 1. Update Repository READMEs
+### [pyFIA](https://github.com/mihiarc/pyfia) — Data Foundation
 
-Copy the appropriate header from `docs-templates/README-HEADERS.md` to each repository.
+High-performance Python API for FIA survey data. DuckDB + Polars backend delivers 10-100x faster queries than EVALIDator with exact statistical compatibility.
 
-### 2. Deploy Landing Page
+```python
+from pyfia import FIA, biomass, tpa
 
-The `landing-page/index.html` is a standalone file that can be:
-- Deployed to GitHub Pages
-- Hosted on Netlify/Vercel
-- Used as a template for a documentation site
-
-### 3. Print Marketing Materials
-
-Open `marketing/one-pager.html` in a browser and print to PDF for conferences.
-
-### 4. Host Logos
-
-Consider creating a `fiatools-branding` repository to host SVG logos so they can be referenced via raw.githubusercontent.com URLs in READMEs.
-
-## Color Quick Reference
-
-| Tool | Primary | Light |
-|------|---------|-------|
-| pyFIA | `#2D5016` | `#4A7C23` |
-| gridFIA | `#1B7C74` | `#2A9D8F` |
-| pyFVS | `#8B6914` | `#B8860B` |
-| askFIA | `#006D6D` | `#008B8B` |
-
-## Font Stack
-
-```css
---font-display: 'Playfair Display', Georgia, serif;
---font-body: 'IBM Plex Sans', system-ui, sans-serif;
---font-mono: 'IBM Plex Mono', 'Fira Code', monospace;
-```
-
-Google Fonts import:
-```html
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;600;700&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+with FIA("database.duckdb") as db:
+    db.clip_by_state(37)  # North Carolina
+    trees = tpa(db, tree_domain="STATUSCD == 1")
+    carbon = biomass(db, by_species=True)
 ```
 
-## Next Steps
+### [gridFIA](https://github.com/mihiarc/gridfia) — Spatial Analysis
 
-1. **Create `fiatools-branding` repo** to host assets
-2. **Update each tool's README** with new headers
-3. **Deploy landing page** to fiatools.org or GitHub Pages
-4. **Add CITATION.cff** files to each repository
-5. **Create social media assets** (Twitter/LinkedIn cards)
+Access BIGMAP raster data for 327 tree species at 30m resolution. Zarr-based storage for efficient spatial queries and diversity calculations.
+
+```python
+from gridfia import GridFIA
+
+api = GridFIA()
+api.download_species(state="Oregon", species_codes=["0131"])
+metrics = api.calculate_metrics(calculations=["shannon_diversity"])
+```
+
+### [pyFVS](https://github.com/mihiarc/pyfvs) — Growth Modeling
+
+Python implementation of the Forest Vegetation Simulator (Southern variant). Simulate growth and yield for loblolly, shortleaf, longleaf, and slash pine.
+
+```python
+from pyfvs import Stand
+
+stand = Stand.initialize_planted(species="LP", trees_per_acre=500, site_index=70)
+stand.grow(years=30)
+```
+
+### [askFIA](https://github.com/mihiarc/askfia) — AI Interface
+
+Natural language queries for forest data. Ask questions in plain English and get answers powered by the entire FIAtools ecosystem.
+
+```python
+from askfia import AskFIA
+
+fia = AskFIA()
+answer = fia.ask("What's the total forest area in Maine?")
+```
+
+## How They Connect
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                         askFIA                              │
+│                  Natural Language Interface                 │
+└─────────────────────────┬───────────────────────────────────┘
+                          │
+          ┌───────────────┼───────────────┐
+          ▼               ▼               ▼
+    ┌──────────┐    ┌──────────┐    ┌──────────┐
+    │  pyFIA   │    │ gridFIA  │    │  pyFVS   │
+    │  Survey  │◄──►│  Spatial │◄──►│  Growth  │
+    │   Data   │    │   Data   │    │  Models  │
+    └──────────┘    └──────────┘    └──────────┘
+          │               │               │
+          └───────────────┼───────────────┘
+                          ▼
+    ┌─────────────────────────────────────────────────────────┐
+    │                    FIA Data Sources                     │
+    │         DataMart  ·  BIGMAP API  ·  EVALIDator          │
+    └─────────────────────────────────────────────────────────┘
+```
+
+## Installation
+
+Install individual tools as needed:
+
+```bash
+pip install pyfia        # Survey data analysis
+pip install gridfia      # Spatial raster analysis
+pip install pyfvs        # Growth simulation
+pip install askfia       # AI interface
+```
+
+Or clone this monorepo with all submodules:
+
+```bash
+git clone --recurse-submodules https://github.com/mihiarc/fiatools.git
+```
+
+## Use Cases
+
+| Use Case | Tools | Description |
+|----------|-------|-------------|
+| **Carbon Accounting** | pyFIA | State/county carbon stock estimates with uncertainty |
+| **Timber Supply** | pyFIA + pyFVS | Project future timber availability |
+| **Biodiversity** | gridFIA | Species richness and diversity indices |
+| **Site Analysis** | pyFIA + gridFIA | Combine survey and spatial data |
+| **Research Queries** | askFIA | Natural language data exploration |
+
+## By the Numbers
+
+| Metric | Value |
+|--------|-------|
+| Tree species covered | 327 |
+| Raster resolution | 30m |
+| FIA plots integrated | 212,000+ |
+| Query speedup | 10-100x |
+
+## Documentation
+
+- **Website:** [fiatools.org](https://fiatools.org)
+- **pyFIA docs:** [mihiarc.github.io/pyfia](https://mihiarc.github.io/pyfia/)
+- **Citation guide:** [docs-templates/CITATION-GUIDE.md](docs-templates/CITATION-GUIDE.md)
+- **Brand guidelines:** [docs-templates/BRAND-GUIDELINES.md](docs-templates/BRAND-GUIDELINES.md)
+
+## Repository Structure
+
+```
+fiatools/
+├── pyfia/           # Survey data analysis (submodule)
+├── gridfia/         # Spatial analysis (submodule)
+├── pyfvs/           # Growth modeling (submodule)
+├── askfia/          # AI interface (submodule)
+├── logos/           # SVG logos for all tools
+├── landing-page/    # fiatools.org source
+├── marketing/       # Conference materials
+└── docs-templates/  # README headers, citations, brand guide
+```
+
+## Citation
+
+```bibtex
+@software{fiatools2025,
+  title = {FIAtools: A Python Ecosystem for Forest Inventory Analysis},
+  author = {Mihiar, Christopher},
+  year = {2025},
+  url = {https://fiatools.org}
+}
+```
+
+## Contributing
+
+Contributions welcome! Each tool has its own issue tracker:
+
+- [pyFIA issues](https://github.com/mihiarc/pyfia/issues)
+- [gridFIA issues](https://github.com/mihiarc/gridfia/issues)
+- [pyFVS issues](https://github.com/mihiarc/pyfvs/issues)
+- [askFIA issues](https://github.com/mihiarc/askfia/issues)
 
 ## License
 
-Branding assets are provided for use with FIAtools projects. The underlying tools are MIT licensed.
+MIT License — see individual repos for details.
+
+---
+
+<div align="center">
+  <sub>Built with 🌲 by <a href="https://github.com/mihiarc">Chris Mihiar</a> · USDA Forest Service Southern Research Station</sub>
+</div>
