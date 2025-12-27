@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorials - FIAtools Python Ecosystem</title>
+    <meta name="description" content="Learn to work with USDA Forest Service FIA data through hands-on Jupyter notebook tutorials covering pyFIA, gridFIA, and pyFVS.">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Tutorials - FIAtools Python Ecosystem">
+    <meta property="og:description" content="Learn to work with USDA Forest Service FIA data through hands-on tutorials.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fiatools.org/tutorials/">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GN26VHE0M4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-GN26VHE0M4');
+    </script>
+
+    <style>
+        :root {
+            --green-800: #166534;
+            --green-700: #15803d;
+            --green-600: #16a34a;
+            --green-100: #dcfce7;
+            --green-50: #f0fdf4;
+            --gray-900: #111827;
+            --gray-700: #374151;
+            --gray-600: #4b5563;
+            --gray-100: #f3f4f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-700);
+            background: #fff;
+        }
+
+        header {
+            background: var(--green-800);
+            color: white;
+            padding: 1rem 2rem;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.9;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        h1 {
+            color: var(--gray-900);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .intro {
+            font-size: 1.25rem;
+            color: var(--gray-600);
+            margin-bottom: 3rem;
+        }
+
+        .tutorial-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .tutorial-card {
+            border: 1px solid var(--gray-100);
+            border-radius: 12px;
+            padding: 2rem;
+            background: white;
+            transition: box-shadow 0.2s;
+        }
+
+        .tutorial-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .tutorial-number {
+            display: inline-block;
+            background: var(--green-100);
+            color: var(--green-700);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .tutorial-card h2 {
+            color: var(--gray-900);
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .tutorial-card p {
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+        }
+
+        .topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .topic {
+            background: var(--gray-100);
+            color: var(--gray-700);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+        }
+
+        .tutorial-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--green-600);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--green-700);
+        }
+
+        .btn-secondary {
+            background: var(--gray-100);
+            color: var(--gray-700);
+        }
+
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+
+        .prerequisites {
+            background: var(--green-50);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .prerequisites h2 {
+            color: var(--green-800);
+            margin-bottom: 1rem;
+        }
+
+        .prerequisites ul {
+            list-style-position: inside;
+            color: var(--gray-600);
+        }
+
+        footer {
+            background: var(--gray-100);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        footer a {
+            color: var(--green-700);
+        }
+
+        @media (max-width: 640px) {
+            .nav-links {
+                display: none;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .tutorial-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">FIAtools</a>
+            <ul class="nav-links">
+                <li><a href="/tools/pyfia/">pyFIA</a></li>
+                <li><a href="/tools/gridfia/">gridFIA</a></li>
+                <li><a href="/tools/pyfvs/">pyFVS</a></li>
+                <li><a href="/tools/askfia/">askFIA</a></li>
+                <li><a href="/tutorials/">Tutorials</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Tutorials</h1>
+        <p class="intro">
+            Learn to work with USDA Forest Service FIA data through hands-on Jupyter notebook tutorials.
+            Each tutorial is designed to run in Google Colab - no local setup required.
+        </p>
+
+        <div class="tutorial-grid">
+            <article class="tutorial-card">
+                <span class="tutorial-number">Tutorial 1</span>
+                <h2>Getting Started with FIA Data</h2>
+                <p>
+                    Learn the fundamentals of querying forest inventory data with pyFIA.
+                    Query forest area, timber volume, biomass, and tree counts for any US state.
+                </p>
+                <div class="topics">
+                    <span class="topic">pyFIA</span>
+                    <span class="topic">Forest Area</span>
+                    <span class="topic">Timber Volume</span>
+                    <span class="topic">Biomass</span>
+                </div>
+                <div class="tutorial-links">
+                    <a href="https://colab.research.google.com/github/mihiarc/fiatools/blob/main/tutorials/01_getting_started_with_fia_data.ipynb" class="btn btn-primary">
+                        Open in Colab
+                    </a>
+                    <a href="https://github.com/mihiarc/fiatools/blob/main/tutorials/01_getting_started_with_fia_data.ipynb" class="btn btn-secondary">
+                        View on GitHub
+                    </a>
+                </div>
+            </article>
+
+            <article class="tutorial-card">
+                <span class="tutorial-number">Tutorial 2</span>
+                <h2>Biomass Mapping with gridFIA</h2>
+                <p>
+                    Create forest biomass and species diversity maps using BIGMAP data at 30-meter resolution.
+                    Calculate Shannon diversity, Simpson's index, and species richness.
+                </p>
+                <div class="topics">
+                    <span class="topic">gridFIA</span>
+                    <span class="topic">BIGMAP</span>
+                    <span class="topic">Species Diversity</span>
+                    <span class="topic">Zarr</span>
+                </div>
+                <div class="tutorial-links">
+                    <a href="https://colab.research.google.com/github/mihiarc/fiatools/blob/main/tutorials/02_biomass_mapping_with_gridfia.ipynb" class="btn btn-primary">
+                        Open in Colab
+                    </a>
+                    <a href="https://github.com/mihiarc/fiatools/blob/main/tutorials/02_biomass_mapping_with_gridfia.ipynb" class="btn btn-secondary">
+                        View on GitHub
+                    </a>
+                </div>
+            </article>
+
+            <article class="tutorial-card">
+                <span class="tutorial-number">Tutorial 3</span>
+                <h2>Forest Growth Simulation with pyFVS</h2>
+                <p>
+                    Simulate forest stand growth using the Forest Vegetation Simulator.
+                    Create yield tables, compare management scenarios, and analyze timber investments.
+                </p>
+                <div class="topics">
+                    <span class="topic">pyFVS</span>
+                    <span class="topic">Growth Models</span>
+                    <span class="topic">Yield Tables</span>
+                    <span class="topic">Thinning</span>
+                </div>
+                <div class="tutorial-links">
+                    <a href="https://colab.research.google.com/github/mihiarc/fiatools/blob/main/tutorials/03_forest_growth_simulation_with_pyfvs.ipynb" class="btn btn-primary">
+                        Open in Colab
+                    </a>
+                    <a href="https://github.com/mihiarc/fiatools/blob/main/tutorials/03_forest_growth_simulation_with_pyfvs.ipynb" class="btn btn-secondary">
+                        View on GitHub
+                    </a>
+                </div>
+            </article>
+        </div>
+
+        <section class="prerequisites">
+            <h2>Prerequisites</h2>
+            <ul>
+                <li>Basic Python knowledge (variables, functions, loops)</li>
+                <li>Google account for Colab (or local Jupyter installation)</li>
+                <li>Tutorials 2-3 benefit from understanding forestry concepts</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            <a href="https://fiatools.org">FIAtools</a> &middot;
+            Python Ecosystem for Forest Inventory Analysis<br>
+            <a href="https://github.com/mihiarc">GitHub</a> &middot;
+            <a href="https://pypi.org/user/mihiarc/">PyPI</a>
+        </p>
+    </footer>
+</body>
+</html>
