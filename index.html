@@ -4,6 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FIAtools — Python Ecosystem for Forest Inventory Analysis</title>
+  <meta name="description" content="FIAtools is a unified Python ecosystem for analyzing USDA Forest Service Forest Inventory and Analysis (FIA) data. From raw survey plots to growth projections and spatial analysis.">
+  <meta name="keywords" content="FIA, forest inventory, Python, USDA Forest Service, forestry, biomass, timber, spatial analysis">
+  <meta name="author" content="Chris Mihiar">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="FIAtools — Python Ecosystem for Forest Inventory Analysis">
+  <meta property="og:description" content="A unified Python ecosystem for analyzing USDA Forest Service FIA data—from raw survey plots to growth projections and spatial analysis.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mihiarc.github.io/fiatools/">
+  <meta property="og:image" content="https://mihiarc.github.io/fiatools/logos/fiatools_logo.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FIAtools — Python Ecosystem for Forest Inventory Analysis">
+  <meta name="twitter:description" content="A unified Python ecosystem for analyzing USDA Forest Service FIA data.">
+  <meta name="twitter:image" content="https://mihiarc.github.io/fiatools/logos/fiatools_logo.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logos/fiatools_logo.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;600;700&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
@@ -586,7 +606,26 @@
       color: rgba(255,255,255,0.4);
       font-size: 0.85rem;
     }
-    
+
+    /* Skip to content link for accessibility */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--pyfia);
+      color: white;
+      padding: 8px 16px;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      text-decoration: none;
+      z-index: 200;
+      transition: top 0.2s;
+    }
+
+    .skip-link:focus {
+      top: 0;
+    }
+
     /* Responsive */
     @media (max-width: 1200px) {
       .tools-grid {
@@ -648,7 +687,8 @@
   </style>
 </head>
 <body>
-  <nav>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <nav role="navigation" aria-label="Main navigation">
     <a href="#" class="logo">FIA<span>tools</span></a>
     <ul class="nav-links">
       <li><a href="#tools">Tools</a></li>
@@ -658,6 +698,7 @@
     </ul>
   </nav>
   
+  <main id="main-content">
   <section class="hero">
     <div class="hero-content">
       <h1>Python tools for <em>forest inventory</em> analysis</h1>
@@ -668,7 +709,7 @@
       </div>
     </div>
     <div class="hero-graphic">
-      <img src="logos/fiatools_logo.png" alt="FIAtools" class="hero-logo">
+      <img src="logos/fiatools_logo.png" alt="FIAtools ecosystem logo" class="hero-logo">
     </div>
   </section>
   
@@ -680,7 +721,7 @@
     
     <div class="tools-grid">
       <div class="tool-card pyfia">
-        <div class="tool-icon"><img src="logos/pyfia_logo.png" alt="pyFIA"></div>
+        <div class="tool-icon"><img src="logos/pyfia_logo.png" alt="pyFIA logo"></div>
         <div class="tool-role">Data Foundation</div>
         <p>High-performance Python API for FIA survey data. DuckDB backend, Polars DataFrames, EVALIDator-compatible statistics.</p>
         <ul class="tool-features">
@@ -692,7 +733,7 @@
       </div>
       
       <div class="tool-card gridfia">
-        <div class="tool-icon"><img src="logos/gridfia_logo.png" alt="gridFIA"></div>
+        <div class="tool-icon"><img src="logos/gridfia_logo.png" alt="gridFIA logo"></div>
         <div class="tool-role">Spatial Analysis</div>
         <p>Zarr-based storage for BIGMAP raster data. 327 species at 30m resolution, optimized for localized biomass analysis.</p>
         <ul class="tool-features">
@@ -704,7 +745,7 @@
       </div>
       
       <div class="tool-card pyfvs">
-        <div class="tool-icon"><img src="logos/pyfvs_logo.png" alt="pyFVS"></div>
+        <div class="tool-icon"><img src="logos/pyfvs_logo.png" alt="pyFVS logo"></div>
         <div class="tool-role">Growth Simulation</div>
         <p>Python implementation of FVS Southern variant. Individual tree growth models for loblolly, shortleaf, longleaf, and slash pine.</p>
         <ul class="tool-features">
@@ -716,7 +757,7 @@
       </div>
       
       <div class="tool-card askfia">
-        <div class="tool-icon"><img src="logos/askfia_logo.png" alt="askFIA"></div>
+        <div class="tool-icon"><img src="logos/askfia_logo.png" alt="askFIA logo"></div>
         <div class="tool-role">AI Interface</div>
         <p>Conversational interface for forest data. Natural language queries powered by the FIAtools ecosystem.</p>
         <ul class="tool-features">
@@ -724,7 +765,8 @@
           <li>Automated analysis</li>
           <li>Report generation</li>
         </ul>
-        <a href="https://github.com/mihiarc/askfia" class="tool-link">View repository →</a>
+        <a href="https://askfia.netlify.app" class="tool-link">Try askFIA →</a>
+        <a href="https://github.com/mihiarc/askfia" class="tool-link" style="background: transparent; color: var(--askfia); border: 1px solid var(--askfia); margin-top: 0.5rem;">View repository →</a>
       </div>
     </div>
   </section>
@@ -765,13 +807,13 @@
       <p>Get running in minutes with pip install and a few lines of code.</p>
     </div>
     
-    <div class="code-tabs">
-      <button class="code-tab active">pyFIA</button>
-      <button class="code-tab">gridFIA</button>
-      <button class="code-tab">pyFVS</button>
+    <div class="code-tabs" role="tablist" aria-label="Code examples">
+      <button class="code-tab active" role="tab" aria-selected="true" aria-controls="panel-pyfia" id="tab-pyfia" data-tab="pyfia">pyFIA</button>
+      <button class="code-tab" role="tab" aria-selected="false" aria-controls="panel-gridfia" id="tab-gridfia" data-tab="gridfia">gridFIA</button>
+      <button class="code-tab" role="tab" aria-selected="false" aria-controls="panel-pyfvs" id="tab-pyfvs" data-tab="pyfvs">pyFVS</button>
     </div>
-    
-    <div class="code-block">
+
+    <div class="code-block" role="tabpanel" id="panel-pyfia" aria-labelledby="tab-pyfia" data-tab="pyfia">
       <pre><code><span class="keyword">from</span> <span class="variable">pyfia</span> <span class="keyword">import</span> FIA, biomass, tpa, volume
 
 <span class="comment"># Connect to FIA database</span>
@@ -779,11 +821,43 @@
     <span class="comment"># Filter to North Carolina</span>
     db.<span class="function">clip_by_state</span>(<span class="variable">37</span>)
     db.<span class="function">clip_most_recent</span>(eval_type=<span class="string">"EXPVOL"</span>)
-    
+
     <span class="comment"># Get forest metrics</span>
     <span class="variable">tpa_results</span> = <span class="function">tpa</span>(db, tree_domain=<span class="string">"STATUSCD == 1"</span>)
     <span class="variable">biomass_results</span> = <span class="function">biomass</span>(db, by_species=<span class="keyword">True</span>)
     <span class="variable">volume_results</span> = <span class="function">volume</span>(db, land_type=<span class="string">"forest"</span>)</code></pre>
+    </div>
+
+    <div class="code-block" role="tabpanel" id="panel-gridfia" aria-labelledby="tab-gridfia" data-tab="gridfia" style="display: none;">
+      <pre><code><span class="keyword">from</span> <span class="variable">gridfia</span> <span class="keyword">import</span> GridFIA
+
+<span class="comment"># Initialize with a state</span>
+<span class="variable">gf</span> = <span class="function">GridFIA</span>(state=<span class="string">"NC"</span>)
+
+<span class="comment"># Get species presence data</span>
+<span class="variable">species_data</span> = gf.<span class="function">get_species_presence</span>(<span class="string">"Pinus taeda"</span>)
+
+<span class="comment"># Calculate diversity indices</span>
+<span class="variable">diversity</span> = gf.<span class="function">calculate_diversity</span>(
+    metrics=[<span class="string">"shannon"</span>, <span class="string">"simpson"</span>]
+)</code></pre>
+    </div>
+
+    <div class="code-block" role="tabpanel" id="panel-pyfvs" aria-labelledby="tab-pyfvs" data-tab="pyfvs" style="display: none;">
+      <pre><code><span class="keyword">from</span> <span class="variable">pyfvs</span> <span class="keyword">import</span> Stand, Tree
+
+<span class="comment"># Create a stand with site index</span>
+<span class="variable">stand</span> = <span class="function">Stand</span>(site_index=<span class="variable">70</span>, site_species=<span class="string">"loblolly"</span>)
+
+<span class="comment"># Add trees from inventory</span>
+stand.<span class="function">add_trees</span>([
+    <span class="function">Tree</span>(species=<span class="string">"loblolly"</span>, dbh=<span class="variable">8.5</span>, height=<span class="variable">55</span>),
+    <span class="function">Tree</span>(species=<span class="string">"loblolly"</span>, dbh=<span class="variable">10.2</span>, height=<span class="variable">62</span>),
+])
+
+<span class="comment"># Project growth for 20 years</span>
+stand.<span class="function">simulate</span>(years=<span class="variable">20</span>, cycle_length=<span class="variable">5</span>)
+<span class="variable">yield_table</span> = stand.<span class="function">get_yield_table</span>()</code></pre>
     </div>
   </section>
   
@@ -816,7 +890,8 @@
       <a href="https://mihiarc.github.io/pyfia/" class="btn btn-secondary">Read the docs</a>
     </div>
   </section>
-  
+  </main>
+
   <footer>
     <div class="footer-content">
       <div class="footer-brand">
@@ -837,7 +912,7 @@
         <ul>
           <li><a href="https://mihiarc.github.io/pyfia/">Documentation</a></li>
           <li><a href="https://github.com/mihiarc/fiatools">GitHub</a></li>
-          <li><a href="#">Citation Guide</a></li>
+          <li><a href="https://mihiarc.github.io/pyfia/citation/">Citation Guide</a></li>
         </ul>
       </div>
       <div class="footer-links">
@@ -845,7 +920,7 @@
         <ul>
           <li><a href="https://www.fia.fs.usda.gov/">FIA Program</a></li>
           <li><a href="https://apps.fs.usda.gov/fia/datamart/datamart.html">FIA DataMart</a></li>
-          <li><a href="#">BIGMAP API</a></li>
+          <li><a href="https://lemma.forestry.oregonstate.edu/projects/bigmap/">BIGMAP API</a></li>
         </ul>
       </div>
     </div>
@@ -853,5 +928,53 @@
       <p>© 2025 Chris Mihiar · USDA Forest Service Southern Research Station</p>
     </div>
   </footer>
+
+  <script>
+    // Code tabs functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const tabs = document.querySelectorAll('.code-tab');
+      const panels = document.querySelectorAll('.code-block[data-tab]');
+
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          const targetTab = this.getAttribute('data-tab');
+
+          // Update tab states
+          tabs.forEach(function(t) {
+            t.classList.remove('active');
+            t.setAttribute('aria-selected', 'false');
+          });
+          this.classList.add('active');
+          this.setAttribute('aria-selected', 'true');
+
+          // Update panel visibility
+          panels.forEach(function(panel) {
+            if (panel.getAttribute('data-tab') === targetTab) {
+              panel.style.display = 'block';
+            } else {
+              panel.style.display = 'none';
+            }
+          });
+        });
+
+        // Keyboard navigation for accessibility
+        tab.addEventListener('keydown', function(e) {
+          const tabList = Array.from(tabs);
+          const currentIndex = tabList.indexOf(this);
+          let newIndex;
+
+          if (e.key === 'ArrowRight') {
+            newIndex = (currentIndex + 1) % tabList.length;
+            tabList[newIndex].focus();
+            tabList[newIndex].click();
+          } else if (e.key === 'ArrowLeft') {
+            newIndex = (currentIndex - 1 + tabList.length) % tabList.length;
+            tabList[newIndex].focus();
+            tabList[newIndex].click();
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
