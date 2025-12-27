@@ -576,25 +576,72 @@
       font-family: var(--font-mono);
       font-size: 0.85rem;
       padding: 0.75rem 1.5rem;
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
       border: none;
-      color: rgba(255,255,255,0.6);
+      border-radius: 8px 8px 0 0;
+      color: rgba(255,255,255,0.4);
       cursor: pointer;
       transition: all 0.2s;
+      position: relative;
+      margin-bottom: -1px;
     }
-    
+
+    .code-tab:hover:not(.active) {
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.6);
+    }
+
     .code-tab.active {
-      background: rgba(255,255,255,0.2);
+      background: rgba(0,0,0,0.3);
       color: white;
+      font-weight: 500;
     }
-    
+
+    .code-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--pyfia), var(--gridfia));
+    }
+
     .code-block {
       max-width: 900px;
       margin: 0 auto;
       background: rgba(0,0,0,0.3);
-      border-radius: 0 4px 4px 4px;
+      border-radius: 0 8px 8px 8px;
       padding: 2rem;
       overflow-x: auto;
+      position: relative;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      padding: 0.4rem 0.75rem;
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .copy-btn:hover {
+      background: rgba(255,255,255,0.2);
+      color: white;
+    }
+
+    .copy-btn.copied {
+      background: rgba(106, 153, 85, 0.3);
+      color: #6a9955;
+      border-color: #6a9955;
     }
     
     .code-block pre {
@@ -1004,7 +1051,12 @@
     </div>
 
     <div class="code-block" role="tabpanel" id="panel-pyfia" aria-labelledby="tab-pyfia" data-tab="pyfia">
-      <pre><code><span class="keyword">from</span> <span class="variable">pyfia</span> <span class="keyword">import</span> FIA, biomass, tpa, volume
+      <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
+      <pre><code><span class="comment"># Install the package</span>
+pip install pyfia
+
+<span class="comment"># Then use it</span>
+<span class="keyword">from</span> <span class="variable">pyfia</span> <span class="keyword">import</span> FIA, biomass, tpa, volume
 
 <span class="comment"># Connect to FIA database</span>
 <span class="keyword">with</span> <span class="function">FIA</span>(<span class="string">"path/to/FIA_database.duckdb"</span>) <span class="keyword">as</span> db:
@@ -1019,7 +1071,12 @@
     </div>
 
     <div class="code-block" role="tabpanel" id="panel-gridfia" aria-labelledby="tab-gridfia" data-tab="gridfia" style="display: none;">
-      <pre><code><span class="keyword">from</span> <span class="variable">gridfia</span> <span class="keyword">import</span> GridFIA
+      <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
+      <pre><code><span class="comment"># Install the package</span>
+pip install gridfia
+
+<span class="comment"># Then use it</span>
+<span class="keyword">from</span> <span class="variable">gridfia</span> <span class="keyword">import</span> GridFIA
 
 <span class="comment"># Initialize with a state</span>
 <span class="variable">gf</span> = <span class="function">GridFIA</span>(state=<span class="string">"NC"</span>)
@@ -1034,7 +1091,12 @@
     </div>
 
     <div class="code-block" role="tabpanel" id="panel-pyfvs" aria-labelledby="tab-pyfvs" data-tab="pyfvs" style="display: none;">
-      <pre><code><span class="keyword">from</span> <span class="variable">pyfvs</span> <span class="keyword">import</span> Stand, Tree
+      <button class="copy-btn" aria-label="Copy code to clipboard">Copy</button>
+      <pre><code><span class="comment"># Install the package</span>
+pip install pyfvs-fia
+
+<span class="comment"># Then use it</span>
+<span class="keyword">from</span> <span class="variable">pyfvs</span> <span class="keyword">import</span> Stand, Tree
 
 <span class="comment"># Create a stand with site index</span>
 <span class="variable">stand</span> = <span class="function">Stand</span>(site_index=<span class="variable">70</span>, site_species=<span class="string">"loblolly"</span>)
@@ -1162,6 +1224,28 @@ stand.<span class="function">simulate</span>(years=<span class="variable">20</sp
             tabList[newIndex].focus();
             tabList[newIndex].click();
           }
+        });
+      });
+
+      // Copy button functionality
+      const copyButtons = document.querySelectorAll('.copy-btn');
+      copyButtons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          const codeBlock = this.parentElement;
+          const code = codeBlock.querySelector('code');
+          const text = code.textContent;
+
+          navigator.clipboard.writeText(text).then(function() {
+            btn.textContent = 'Copied!';
+            btn.classList.add('copied');
+
+            setTimeout(function() {
+              btn.textContent = 'Copy';
+              btn.classList.remove('copied');
+            }, 2000);
+          }).catch(function(err) {
+            console.error('Failed to copy: ', err);
+          });
         });
       });
     });
