@@ -382,17 +382,21 @@
 
     /* Workflow Section - Hub and Spoke */
     .workflow-section {
-      padding: 8rem 4rem;
-      max-width: 1200px;
-      margin: 0 auto;
+      padding: 6rem 4rem;
+      background: var(--bg-secondary);
+    }
+
+    .workflow-section .section-header {
+      max-width: 600px;
+      margin: 0 auto 2rem;
     }
 
     .workflow-hub {
       position: relative;
       width: 100%;
-      max-width: 700px;
-      height: 500px;
-      margin: 4rem auto 0;
+      max-width: 800px;
+      height: 420px;
+      margin: 0 auto;
     }
 
     .workflow-connections {
@@ -405,14 +409,15 @@
     }
 
     .workflow-connections line {
-      stroke: rgba(0, 0, 0, 0.15);
+      stroke: rgba(0, 0, 0, 0.12);
       stroke-width: 2;
     }
 
     .workflow-connections line.data-flow {
       stroke: var(--pyfia);
-      stroke-width: 2;
-      stroke-dasharray: 6, 4;
+      stroke-width: 2.5;
+      stroke-dasharray: 8, 5;
+      opacity: 0.7;
     }
 
     .workflow-node {
@@ -426,74 +431,81 @@
       left: 50%;
     }
 
-    .workflow-node.top {
-      top: 8%;
+    .workflow-node.left {
+      top: 25%;
+      left: 15%;
+    }
+
+    .workflow-node.right {
+      top: 25%;
+      left: 85%;
+    }
+
+    .workflow-node.bottom {
+      top: 85%;
       left: 50%;
     }
 
-    .workflow-node.bottom-left {
-      top: 85%;
-      left: 20%;
-    }
-
-    .workflow-node.bottom-right {
-      top: 85%;
-      left: 80%;
-    }
-
     .node-circle {
-      width: 100px;
-      height: 100px;
+      width: 90px;
+      height: 90px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       margin: 0 auto 0.75rem;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: 3px solid rgba(255, 255, 255, 0.3);
     }
 
     .node-circle:hover {
-      transform: scale(1.08);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      transform: scale(1.1);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.25);
     }
 
     .node-circle img {
-      width: 70%;
-      height: 70%;
+      width: 65%;
+      height: 65%;
       object-fit: contain;
     }
 
     .workflow-node.center .node-circle {
-      width: 140px;
-      height: 140px;
+      width: 130px;
+      height: 130px;
       background: var(--askfia);
-      box-shadow: 0 4px 20px rgba(0, 109, 109, 0.3);
+      box-shadow: 0 6px 24px rgba(0, 109, 109, 0.35);
+      border: 4px solid rgba(255, 255, 255, 0.25);
     }
 
-    .workflow-node.top .node-circle {
+    .workflow-node.left .node-circle {
       background: var(--pyfia);
+      box-shadow: 0 4px 16px rgba(45, 80, 22, 0.3);
     }
 
-    .workflow-node.bottom-left .node-circle {
-      background: var(--gridfia);
-    }
-
-    .workflow-node.bottom-right .node-circle {
+    .workflow-node.right .node-circle {
       background: var(--pyfvs);
+      box-shadow: 0 4px 16px rgba(139, 105, 20, 0.3);
+    }
+
+    .workflow-node.bottom .node-circle {
+      background: var(--gridfia);
+      box-shadow: 0 4px 16px rgba(27, 124, 116, 0.3);
     }
 
     .node-label {
       font-family: var(--font-mono);
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.2rem;
+      color: var(--text-primary);
     }
 
     .node-desc {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
-      max-width: 140px;
+      max-width: 120px;
       margin: 0 auto;
+      line-height: 1.4;
     }
 
     .workflow-node.center .node-label {
@@ -501,16 +513,22 @@
     }
 
     .workflow-node.center .node-desc {
-      max-width: 160px;
+      max-width: 150px;
+      font-size: 0.8rem;
     }
 
     .workflow-legend {
       display: flex;
       justify-content: center;
-      gap: 2rem;
-      margin-top: 2rem;
-      font-size: 0.8rem;
+      gap: 2.5rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
+      border-top: 1px solid rgba(0, 0, 0, 0.06);
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .legend-item {
@@ -520,14 +538,14 @@
     }
 
     .legend-line {
-      width: 30px;
+      width: 24px;
       height: 2px;
-      background: rgba(0, 0, 0, 0.15);
+      background: rgba(0, 0, 0, 0.12);
     }
 
     .legend-line.dashed {
-      background: linear-gradient(90deg, var(--pyfia) 60%, transparent 60%);
-      background-size: 10px 2px;
+      background: linear-gradient(90deg, var(--pyfia) 55%, transparent 55%);
+      background-size: 8px 2px;
     }
     
     /* Code Example Section */
@@ -767,32 +785,42 @@
         grid-template-columns: 1fr;
       }
 
+      .workflow-section {
+        padding: 4rem 2rem;
+      }
+
       .workflow-hub {
-        height: 600px;
+        height: 500px;
+        max-width: 100%;
       }
 
-      .workflow-node.top {
-        top: 5%;
-      }
-
-      .workflow-node.bottom-left {
-        top: 90%;
+      .workflow-node.left {
+        top: 15%;
         left: 25%;
       }
 
-      .workflow-node.bottom-right {
-        top: 90%;
+      .workflow-node.right {
+        top: 15%;
         left: 75%;
       }
 
+      .workflow-node.bottom {
+        top: 88%;
+        left: 50%;
+      }
+
       .node-circle {
-        width: 80px;
-        height: 80px;
+        width: 70px;
+        height: 70px;
       }
 
       .workflow-node.center .node-circle {
-        width: 110px;
-        height: 110px;
+        width: 100px;
+        height: 100px;
+      }
+
+      .workflow-connections {
+        display: none;
       }
 
       .workflow-legend {
@@ -904,13 +932,13 @@
 
     <div class="workflow-hub">
       <!-- SVG connections -->
-      <svg class="workflow-connections" viewBox="0 0 700 500" preserveAspectRatio="xMidYMid meet">
+      <svg class="workflow-connections" viewBox="0 0 800 420" preserveAspectRatio="xMidYMid meet">
         <!-- Lines from outer nodes to center (askFIA) -->
-        <line x1="350" y1="90" x2="350" y2="210" />
-        <line x1="140" y1="385" x2="280" y2="280" />
-        <line x1="560" y1="385" x2="420" y2="280" />
+        <line x1="120" y1="105" x2="330" y2="190" />
+        <line x1="680" y1="105" x2="470" y2="190" />
+        <line x1="400" y1="357" x2="400" y2="275" />
         <!-- Data flow line: pyFIA to pyFVS -->
-        <line class="data-flow" x1="350" y1="90" x2="560" y2="385" />
+        <line class="data-flow" x1="160" y1="130" x2="640" y2="130" />
       </svg>
 
       <!-- Center: askFIA (hub) -->
@@ -919,34 +947,34 @@
           <img src="logos/askfia_logo.png" alt="askFIA logo">
         </div>
         <div class="node-label">askFIA</div>
-        <div class="node-desc">AI interface that orchestrates all tools</div>
+        <div class="node-desc">AI orchestration layer</div>
       </div>
 
-      <!-- Top: pyFIA -->
-      <div class="workflow-node top">
+      <!-- Left: pyFIA -->
+      <div class="workflow-node left">
         <div class="node-circle">
           <img src="logos/pyfia_logo.png" alt="pyFIA logo">
         </div>
         <div class="node-label">pyFIA</div>
-        <div class="node-desc">Survey data foundation</div>
+        <div class="node-desc">Survey data</div>
       </div>
 
-      <!-- Bottom Left: gridFIA -->
-      <div class="workflow-node bottom-left">
-        <div class="node-circle">
-          <img src="logos/gridfia_logo.png" alt="gridFIA logo">
-        </div>
-        <div class="node-label">gridFIA</div>
-        <div class="node-desc">Spatial raster analysis</div>
-      </div>
-
-      <!-- Bottom Right: pyFVS -->
-      <div class="workflow-node bottom-right">
+      <!-- Right: pyFVS -->
+      <div class="workflow-node right">
         <div class="node-circle">
           <img src="logos/pyfvs_logo.png" alt="pyFVS logo">
         </div>
         <div class="node-label">pyFVS</div>
-        <div class="node-desc">Growth simulation</div>
+        <div class="node-desc">Growth models</div>
+      </div>
+
+      <!-- Bottom: gridFIA -->
+      <div class="workflow-node bottom">
+        <div class="node-circle">
+          <img src="logos/gridfia_logo.png" alt="gridFIA logo">
+        </div>
+        <div class="node-label">gridFIA</div>
+        <div class="node-desc">Spatial analysis</div>
       </div>
     </div>
 
