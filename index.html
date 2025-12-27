@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FIAtools — Python Ecosystem for Forest Inventory Analysis</title>
-  <meta name="description" content="FIAtools is a unified Python ecosystem for analyzing USDA Forest Service Forest Inventory and Analysis (FIA) data. From raw survey plots to growth projections and spatial analysis.">
-  <meta name="keywords" content="FIA, forest inventory, Python, USDA Forest Service, forestry, biomass, timber, spatial analysis">
+  <title>FIAtools — Python Ecosystem for Forest Inventory Analysis | USDA FIA Data</title>
+  <meta name="description" content="FIAtools: Open-source Python tools for USDA Forest Service FIA data analysis. Query forest inventory 100x faster with pyFIA (DuckDB), analyze 327 species with gridFIA spatial rasters, simulate growth with pyFVS, and explore data with AI-powered askFIA.">
+  <meta name="keywords" content="FIA, forest inventory, Python, USDA Forest Service, forestry, biomass, timber volume, spatial analysis, carbon stocks, FIA database, pyFIA, gridFIA, pyFVS, askFIA, forest data, tree species, EVALIDator, DuckDB, Polars, forest growth simulation, BIGMAP, forest biometrics, natural resources, GIS, raster analysis">
   <meta name="author" content="Chris Mihiar">
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow">
+  <meta name="theme-color" content="#2D5016">
 
   <!-- Open Graph -->
   <meta property="og:title" content="FIAtools — Python Ecosystem for Forest Inventory Analysis">
@@ -23,6 +26,166 @@
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="logos/fiatools_logo.png">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://mihiarc.github.io/fiatools/">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://mihiarc.github.io/fiatools/#website",
+        "url": "https://mihiarc.github.io/fiatools/",
+        "name": "FIAtools",
+        "description": "A unified Python ecosystem for analyzing USDA Forest Service Forest Inventory and Analysis (FIA) data",
+        "publisher": {
+          "@id": "https://mihiarc.github.io/fiatools/#organization"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://mihiarc.github.io/fiatools/#organization",
+        "name": "FIAtools",
+        "url": "https://mihiarc.github.io/fiatools/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://mihiarc.github.io/fiatools/logos/fiatools_logo.png"
+        },
+        "sameAs": [
+          "https://github.com/mihiarc/fiatools"
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://mihiarc.github.io/fiatools/#pyfia",
+        "name": "pyFIA",
+        "description": "High-performance Python API for USDA Forest Inventory and Analysis (FIA) survey data with DuckDB backend and Polars DataFrames. Query trees per acre, biomass, timber volume, and carbon stocks 10-100x faster than EVALIDator.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Windows, macOS, Linux",
+        "softwareVersion": "1.1.0",
+        "url": "https://github.com/mihiarc/pyfia",
+        "downloadUrl": "https://pypi.org/project/pyfia/",
+        "license": "https://opensource.org/licenses/MIT",
+        "programmingLanguage": "Python",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "author": {
+          "@id": "https://mihiarc.github.io/fiatools/#organization"
+        }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://mihiarc.github.io/fiatools/#gridfia",
+        "name": "gridFIA",
+        "description": "Python library for USDA Forest Service BIGMAP spatial raster analysis. Access 327 tree species at 30m resolution with Zarr-based cloud-optimized storage for biomass and species distribution mapping.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Windows, macOS, Linux",
+        "softwareVersion": "0.3.1",
+        "url": "https://github.com/mihiarc/gridfia",
+        "downloadUrl": "https://pypi.org/project/gridfia/",
+        "license": "https://opensource.org/licenses/MIT",
+        "programmingLanguage": "Python",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "author": {
+          "@id": "https://mihiarc.github.io/fiatools/#organization"
+        }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://mihiarc.github.io/fiatools/#pyfvs",
+        "name": "pyFVS",
+        "description": "Python implementation of the Forest Vegetation Simulator (FVS) Southern variant. Individual tree growth models for loblolly, shortleaf, longleaf, and slash pine with Chapman-Richards growth curves.",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Windows, macOS, Linux",
+        "softwareVersion": "0.2.0",
+        "url": "https://github.com/mihiarc/pyfvs",
+        "downloadUrl": "https://pypi.org/project/pyfvs-fia/",
+        "license": "https://opensource.org/licenses/MIT",
+        "programmingLanguage": "Python",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "author": {
+          "@id": "https://mihiarc.github.io/fiatools/#organization"
+        }
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://mihiarc.github.io/fiatools/#askfia",
+        "name": "askFIA",
+        "description": "AI-powered natural language interface for querying USDA Forest Service FIA data. Ask questions about forest area, timber volume, biomass, and carbon stocks in plain English.",
+        "applicationCategory": "WebApplication",
+        "url": "https://askfia.netlify.app",
+        "browserRequirements": "Requires JavaScript",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "author": {
+          "@id": "https://mihiarc.github.io/fiatools/#organization"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is FIAtools?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "FIAtools is a unified Python ecosystem for analyzing USDA Forest Service Forest Inventory and Analysis (FIA) data. It includes four integrated tools: pyFIA for survey data access, gridFIA for spatial raster analysis, pyFVS for growth simulation, and askFIA for natural language queries."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I install pyFIA?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Install pyFIA using pip: pip install pyfia. It requires Python 3.11 or higher and includes DuckDB for high-performance database queries."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is FIAtools free to use?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, FIAtools is completely free and open source under the MIT license. All tools (pyFIA, gridFIA, pyFVS, askFIA) are available on GitHub and PyPI."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How fast is pyFIA compared to EVALIDator?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "pyFIA is 10-100x faster than the official USDA EVALIDator tool for querying forest inventory data, thanks to its DuckDB backend and Polars DataFrames."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What data sources does FIAtools use?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "FIAtools uses official USDA Forest Service data including FIA DataMart for survey plot data and BIGMAP for 30m resolution species distribution rasters covering 327 tree species."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -928,7 +1091,7 @@
       </div>
     </div>
     <div class="hero-graphic">
-      <img src="logos/fiatools_logo.png" alt="FIAtools ecosystem logo" class="hero-logo">
+      <img src="logos/fiatools_logo.png" alt="FIAtools - Python ecosystem for USDA Forest Inventory Analysis including pyFIA, gridFIA, pyFVS, and askFIA tools" class="hero-logo">
     </div>
   </section>
   
@@ -940,7 +1103,7 @@
     
     <div class="tools-grid">
       <div class="tool-card pyfia">
-        <div class="tool-icon"><img src="logos/pyfia_logo.png" alt="pyFIA logo"></div>
+        <div class="tool-icon"><img src="logos/pyfia_logo.png" alt="pyFIA - High-performance Python API for FIA survey data with DuckDB and Polars"></div>
         <div class="tool-role">Data Foundation</div>
         <p>High-performance Python API for FIA survey data. DuckDB backend, Polars DataFrames, EVALIDator-compatible statistics.</p>
         <ul class="tool-features">
@@ -952,7 +1115,7 @@
       </div>
       
       <div class="tool-card gridfia">
-        <div class="tool-icon"><img src="logos/gridfia_logo.png" alt="gridFIA logo"></div>
+        <div class="tool-icon"><img src="logos/gridfia_logo.png" alt="gridFIA - Python library for BIGMAP spatial raster analysis of 327 tree species"></div>
         <div class="tool-role">Spatial Analysis</div>
         <p>Zarr-based storage for BIGMAP raster data. 327 species at 30m resolution, optimized for localized biomass analysis.</p>
         <ul class="tool-features">
@@ -964,7 +1127,7 @@
       </div>
       
       <div class="tool-card pyfvs">
-        <div class="tool-icon"><img src="logos/pyfvs_logo.png" alt="pyFVS logo"></div>
+        <div class="tool-icon"><img src="logos/pyfvs_logo.png" alt="pyFVS - Python implementation of Forest Vegetation Simulator for growth modeling"></div>
         <div class="tool-role">Growth Simulation</div>
         <p>Python implementation of FVS Southern variant. Individual tree growth models for loblolly, shortleaf, longleaf, and slash pine.</p>
         <ul class="tool-features">
@@ -976,7 +1139,7 @@
       </div>
       
       <div class="tool-card askfia">
-        <div class="tool-icon"><img src="logos/askfia_logo.png" alt="askFIA logo"></div>
+        <div class="tool-icon"><img src="logos/askfia_logo.png" alt="askFIA - AI-powered natural language interface for forest data queries"></div>
         <div class="tool-role">AI Interface</div>
         <p>Conversational interface for forest data. Natural language queries powered by the FIAtools ecosystem.</p>
         <ul class="tool-features">
@@ -1010,7 +1173,7 @@
       <!-- Center: askFIA (hub) -->
       <div class="workflow-node center">
         <div class="node-circle">
-          <img src="logos/askfia_logo.png" alt="askFIA logo">
+          <img src="logos/askfia_logo.png" alt="askFIA orchestrates pyFIA, gridFIA, and pyFVS through natural language">
         </div>
         <div class="node-label">askFIA</div>
         <div class="node-desc">AI orchestration</div>
@@ -1019,7 +1182,7 @@
       <!-- Left: pyFIA -->
       <div class="workflow-node left">
         <div class="node-circle">
-          <img src="logos/pyfia_logo.png" alt="pyFIA logo">
+          <img src="logos/pyfia_logo.png" alt="pyFIA provides FIA survey data to the ecosystem">
         </div>
         <div class="node-label">pyFIA</div>
         <div class="node-desc">Survey data</div>
@@ -1028,7 +1191,7 @@
       <!-- Right: pyFVS -->
       <div class="workflow-node right">
         <div class="node-circle">
-          <img src="logos/pyfvs_logo.png" alt="pyFVS logo">
+          <img src="logos/pyfvs_logo.png" alt="pyFVS provides forest growth simulation models">
         </div>
         <div class="node-label">pyFVS</div>
         <div class="node-desc">Growth models</div>
@@ -1037,7 +1200,7 @@
       <!-- Bottom: gridFIA -->
       <div class="workflow-node bottom">
         <div class="node-circle">
-          <img src="logos/gridfia_logo.png" alt="gridFIA logo">
+          <img src="logos/gridfia_logo.png" alt="gridFIA provides spatial raster analysis capabilities">
         </div>
         <div class="node-label">gridFIA</div>
         <div class="node-desc">Spatial analysis</div>

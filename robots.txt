@@ -1,0 +1,11 @@
+# Robots.txt for FIAtools
+# https://mihiarc.github.io/fiatools/
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://mihiarc.github.io/fiatools/sitemap.xml
+
+# Crawl-delay (optional, for polite crawling)
+Crawl-delay: 1
