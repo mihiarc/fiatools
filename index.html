@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FIAtools — Python Ecosystem for Forest Inventory Analysis | USDA FIA Data</title>
-  <meta name="description" content="FIAtools: Open-source Python tools for USDA Forest Service FIA data analysis. Query forest inventory 100x faster with pyFIA (DuckDB), analyze 327 species with gridFIA spatial rasters, simulate growth with pyFVS, and explore data with AI-powered askFIA.">
+  <meta name="description" content="FIAtools: Open-source Python tools for USDA Forest Service FIA data analysis. Query forest inventory with pyFIA (DuckDB), analyze 327 species with gridFIA spatial rasters, simulate growth with pyFVS, and explore data with AI-powered askFIA.">
   <meta name="keywords" content="FIA, forest inventory, Python, USDA Forest Service, forestry, biomass, timber volume, spatial analysis, carbon stocks, FIA database, pyFIA, gridFIA, pyFVS, askFIA, forest data, tree species, EVALIDator, DuckDB, Polars, forest growth simulation, BIGMAP, forest biometrics, natural resources, GIS, raster analysis">
   <meta name="author" content="Chris Mihiar">
   <meta name="robots" content="index, follow">
@@ -62,7 +62,7 @@
         "@type": "SoftwareApplication",
         "@id": "https://fiatools.org/#pyfia",
         "name": "pyFIA",
-        "description": "High-performance Python API for USDA Forest Inventory and Analysis (FIA) survey data with DuckDB backend and Polars DataFrames. Query trees per acre, biomass, timber volume, and carbon stocks 10-100x faster than EVALIDator.",
+        "description": "High-performance Python API for USDA Forest Inventory and Analysis (FIA) survey data with DuckDB backend and Polars DataFrames. Query trees per acre, biomass, timber volume, and carbon stocks with EVALIDator-compatible results.",
         "applicationCategory": "DeveloperApplication",
         "operatingSystem": "Windows, macOS, Linux",
         "softwareVersion": "1.1.0",
@@ -167,10 +167,10 @@
           },
           {
             "@type": "Question",
-            "name": "How fast is pyFIA compared to EVALIDator?",
+            "name": "Is pyFIA compatible with EVALIDator?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "pyFIA is 10-100x faster than the official USDA EVALIDator tool for querying forest inventory data, thanks to its DuckDB backend and Polars DataFrames."
+              "text": "Yes, pyFIA produces EVALIDator-compatible results using the same estimation methods as the official USDA tool. The DuckDB backend and Polars DataFrames enable efficient local processing of forest inventory data."
             }
           },
           {
@@ -1109,7 +1109,7 @@
         <ul class="tool-features">
           <li>Trees per acre, biomass, volume</li>
           <li>Post-stratified estimation</li>
-          <li>10-100x faster queries</li>
+          <li>EVALIDator-compatible results</li>
         </ul>
         <a href="https://github.com/mihiarc/pyfia" class="tool-link">View repository →</a>
       </div>
@@ -1338,11 +1338,12 @@ stand.<span class="function">simulate</span>(years=<span class="variable">20</sp
       <div class="stat-item">
         <div class="stat-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            <path d="M9 12l2 2 4-4"/>
+            <circle cx="12" cy="12" r="10"/>
           </svg>
         </div>
-        <h3><span class="stat-number" data-value="100">0</span><span class="stat-suffix">x</span></h3>
-        <p>Faster than EVALIDator</p>
+        <h3><span class="stat-number" data-value="4">0</span></h3>
+        <p>Integrated tools</p>
       </div>
     </div>
   </section>
