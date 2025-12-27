@@ -659,32 +659,72 @@
     /* Stats Section */
     .stats-section {
       padding: 6rem 4rem;
-      background: var(--bg-secondary);
+      background: white;
     }
-    
+
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 2rem;
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
       text-align: center;
     }
-    
+
+    .stat-item {
+      background: var(--bg-primary);
+      border-radius: 12px;
+      padding: 2rem 1.5rem;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .stat-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 1rem;
+      color: var(--pyfia);
+    }
+
+    .stat-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
     .stat-item h3 {
       font-family: var(--font-display);
-      font-size: 3.5rem;
+      font-size: 3rem;
       font-weight: 400;
       color: var(--pyfia);
       margin-bottom: 0.5rem;
     }
-    
+
     .stat-item p {
       font-family: var(--font-mono);
       font-size: 0.85rem;
       color: var(--text-muted);
     }
-    
+
+    .stat-unit {
+      font-size: 0.6em;
+      font-weight: 300;
+      opacity: 0.7;
+      vertical-align: baseline;
+    }
+
+    .stat-suffix {
+      font-size: 0.6em;
+      font-weight: 300;
+      opacity: 0.7;
+      vertical-align: baseline;
+    }
+
     /* CTA Section */
     .cta-section {
       padding: 8rem 4rem;
@@ -1113,22 +1153,54 @@ stand.<span class="function">simulate</span>(years=<span class="variable">20</sp
     </div>
   </section>
   
-  <section class="stats-section">
+  <section class="stats-section" id="stats">
     <div class="stats-grid">
       <div class="stat-item">
-        <h3>327</h3>
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v18"/>
+            <path d="M12 7l-4 4"/>
+            <path d="M12 7l4 4"/>
+            <path d="M12 11l-3 3"/>
+            <path d="M12 11l3 3"/>
+            <path d="M12 15l-2 2"/>
+            <path d="M12 15l2 2"/>
+            <path d="M8 21h8"/>
+          </svg>
+        </div>
+        <h3><span class="stat-number" data-value="327">0</span></h3>
         <p>Tree species covered</p>
       </div>
       <div class="stat-item">
-        <h3>30m</h3>
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <line x1="3" y1="9" x2="21" y2="9"/>
+            <line x1="3" y1="15" x2="21" y2="15"/>
+            <line x1="9" y1="3" x2="9" y2="21"/>
+            <line x1="15" y1="3" x2="15" y2="21"/>
+          </svg>
+        </div>
+        <h3><span class="stat-number" data-value="30">0</span><span class="stat-suffix">m</span></h3>
         <p>Raster resolution</p>
       </div>
       <div class="stat-item">
-        <h3>212K</h3>
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+            <circle cx="12" cy="9" r="2.5"/>
+          </svg>
+        </div>
+        <h3><span class="stat-number" data-value="212">0</span><span class="stat-suffix">K</span></h3>
         <p>FIA plots integrated</p>
       </div>
       <div class="stat-item">
-        <h3>100×</h3>
+        <div class="stat-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+        </div>
+        <h3><span class="stat-number" data-value="100">0</span><span class="stat-suffix">x</span></h3>
         <p>Faster than EVALIDator</p>
       </div>
     </div>
@@ -1248,6 +1320,67 @@ stand.<span class="function">simulate</span>(years=<span class="variable">20</sp
           });
         });
       });
+
+      // Stats count-up animation
+      var statsAnimated = false;
+      var statsSection = document.getElementById('stats');
+
+      function easeOutQuart(t) {
+        return 1 - Math.pow(1 - t, 4);
+      }
+
+      function animateNumber(element, targetValue, duration) {
+        var startTime = null;
+        var startValue = 0;
+
+        function animate(currentTime) {
+          if (startTime === null) startTime = currentTime;
+          var elapsed = currentTime - startTime;
+          var progress = Math.min(elapsed / duration, 1);
+          var easedProgress = easeOutQuart(progress);
+          var currentValue = Math.round(startValue + (targetValue - startValue) * easedProgress);
+
+          element.textContent = currentValue;
+
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          }
+        }
+
+        requestAnimationFrame(animate);
+      }
+
+      function animateStats() {
+        if (statsAnimated) return;
+        statsAnimated = true;
+
+        var statNumbers = document.querySelectorAll('.stat-number');
+        statNumbers.forEach(function(numEl) {
+          var targetValue = parseInt(numEl.getAttribute('data-value'), 10);
+          animateNumber(numEl, targetValue, 2000);
+        });
+      }
+
+      // IntersectionObserver to detect when stats section enters viewport
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              animateStats();
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.3
+        });
+
+        if (statsSection) {
+          observer.observe(statsSection);
+        }
+      } else {
+        // Fallback for browsers without IntersectionObserver
+        animateStats();
+      }
     });
   </script>
 </body>
