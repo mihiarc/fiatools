@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pyFVS - Forest Growth Simulator in Python | Forest Vegetation Simulator</title>
+    <meta name="description" content="pyFVS is a Python implementation of forest growth simulation. Model stand dynamics, project timber yields, and simulate harvest scenarios using Chapman-Richards growth equations.">
+    <meta name="keywords" content="forest growth model, FVS simulator, timber yield projection, forest stand dynamics, Chapman-Richards, harvest simulation, silviculture, forest management, growth and yield">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <link rel="canonical" href="https://fiatools.org/tools/pyfvs/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="pyFVS - Forest Growth Simulator in Python">
+    <meta property="og:description" content="Simulate forest stand growth, project timber yields, and model harvest scenarios with Python.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fiatools.org/tools/pyfvs/">
+    <meta property="og:site_name" content="FIAtools">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="pyFVS - Forest Growth Simulator in Python">
+    <meta name="twitter:description" content="Simulate forest stand growth and project timber yields with Python.">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "pyFVS",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Windows, macOS, Linux",
+        "description": "Python implementation of forest growth simulation using Chapman-Richards equations for timber yield projection and harvest scenario modeling",
+        "url": "https://fiatools.org/tools/pyfvs/",
+        "downloadUrl": "https://github.com/mihiarc/pyfvs",
+        "softwareVersion": "0.1.0",
+        "author": {
+            "@type": "Organization",
+            "name": "FIAtools",
+            "url": "https://fiatools.org"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "Chapman-Richards growth equations",
+            "Multi-species stand simulation",
+            "Harvest scenario modeling",
+            "Mortality projection",
+            "Regeneration modeling",
+            "Basal area projection",
+            "Volume yield curves",
+            "Climate-adjusted growth"
+        ],
+        "programmingLanguage": "Python"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is pyFVS?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "pyFVS is a Python library for forest growth simulation inspired by the USDA Forest Vegetation Simulator (FVS). It models individual tree and stand-level growth using Chapman-Richards equations and supports harvest scenario planning."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What growth equations does pyFVS use?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "pyFVS primarily uses Chapman-Richards growth equations, which model tree height and diameter growth as asymptotic functions. The library also supports site index curves and species-specific growth modifiers."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Can pyFVS simulate timber harvests?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, pyFVS includes harvest simulation capabilities. You can model different harvest methods including clearcut, shelterwood, selection cutting, and thinning operations with customizable parameters."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Which tree species does pyFVS support?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "pyFVS currently includes growth models for major southern pine species (loblolly, longleaf, slash, shortleaf) with plans to expand to hardwood and western conifer species."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "FIAtools",
+                "item": "https://fiatools.org/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "pyFVS",
+                "item": "https://fiatools.org/tools/pyfvs/"
+            }
+        ]
+    }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #1a1a2e;
+            background: #f8fafc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #7c3626;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #7c3626;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #7c3626 0%, #a85340 100%);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero .tagline {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .hero .description {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+            opacity: 0.85;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #7c3626;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            margin-left: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .stats-bar {
+            background: #5a261b;
+            padding: 2rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .stat-item h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            opacity: 0.8;
+        }
+
+        .features {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #7c3626;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: #7c3626;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .feature-card p {
+            color: #4a5568;
+        }
+
+        .code-section {
+            background: #1a1a2e;
+            padding: 5rem 0;
+            color: white;
+        }
+
+        .code-section .section-title {
+            color: white;
+        }
+
+        .code-block {
+            background: #0d0d1a;
+            border-radius: 12px;
+            padding: 2rem;
+            overflow-x: auto;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .code-block pre {
+            font-family: 'Fira Code', 'Monaco', monospace;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .code-block .comment { color: #6b7280; }
+        .code-block .keyword { color: #c792ea; }
+        .code-block .function { color: #82aaff; }
+        .code-block .string { color: #c3e88d; }
+        .code-block .variable { color: #f78c6c; }
+
+        .species {
+            padding: 5rem 0;
+            background: #fdf5f3;
+        }
+
+        .species-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .species-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #7c3626;
+            text-align: center;
+        }
+
+        .species-card h4 {
+            color: #7c3626;
+            margin-bottom: 0.5rem;
+        }
+
+        .species-card .scientific {
+            font-style: italic;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: #82aaff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.2rem;
+            }
+
+            .btn-secondary {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="https://fiatools.org/" class="logo">FIAtools</a>
+            <ul class="nav-links">
+                <li><a href="https://fiatools.org/">Home</a></li>
+                <li><a href="https://fiatools.org/tools/pyfia/">pyFIA</a></li>
+                <li><a href="https://fiatools.org/tools/gridfia/">gridFIA</a></li>
+                <li><a href="https://fiatools.org/tools/pyfvs/">pyFVS</a></li>
+                <li><a href="https://fiatools.org/tools/askfia/">askFIA</a></li>
+                <li><a href="https://github.com/mihiarc/pyfvs">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1>pyFVS</h1>
+            <p class="tagline">Forest Growth Simulator in Python</p>
+            <p class="description">
+                Model forest stand dynamics, project timber yields, and simulate harvest scenarios.
+                Python implementation of growth and yield modeling using Chapman-Richards equations.
+            </p>
+            <a href="https://github.com/mihiarc/pyfvs" class="btn btn-primary">View on GitHub</a>
+            <a href="https://pyfvs.fiatools.org" class="btn btn-secondary">Documentation</a>
+        </div>
+    </section>
+
+    <section class="stats-bar">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>4 Pine Species</h3>
+                    <p>Growth Models</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Chapman-Richards</h3>
+                    <p>Growth Equations</p>
+                </div>
+                <div class="stat-item">
+                    <h3>50+ Years</h3>
+                    <p>Projection Horizon</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Open Source</h3>
+                    <p>MIT Licensed</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Stand Growth Simulation</h3>
+                    <p>Project individual tree and stand-level growth using validated Chapman-Richards equations calibrated to FIA data.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Harvest Modeling</h3>
+                    <p>Simulate clearcut, shelterwood, selection, and thinning harvest operations with customizable removal criteria.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Mortality Projection</h3>
+                    <p>Model natural mortality using density-dependent and competition-based mortality functions.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Regeneration Modeling</h3>
+                    <p>Simulate post-harvest regeneration with species-specific establishment and early growth models.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Yield Curves</h3>
+                    <p>Generate volume yield curves for timber supply analysis and forest management planning.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Site Index Integration</h3>
+                    <p>Incorporate site productivity through site index curves that modify growth projections.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="code-section">
+        <div class="container">
+            <h2 class="section-title">Quick Start</h2>
+            <div class="code-block">
+                <pre><code><span class="comment"># Install pyFVS</span>
+<span class="variable">pip install pyfvs</span>
+
+<span class="comment"># Import and simulate growth</span>
+<span class="keyword">from</span> pyfvs <span class="keyword">import</span> Stand, simulate
+
+<span class="comment"># Initialize a loblolly pine stand</span>
+stand = <span class="function">Stand</span>(
+    species=<span class="string">"loblolly_pine"</span>,
+    age=<span class="variable">15</span>,
+    site_index=<span class="variable">70</span>,
+    trees_per_acre=<span class="variable">450</span>
+)
+
+<span class="comment"># Project growth for 30 years</span>
+projection = <span class="function">simulate</span>(
+    stand,
+    years=<span class="variable">30</span>,
+    harvest_age=<span class="variable">25</span>
+)
+
+<span class="comment"># View yield table</span>
+<span class="keyword">print</span>(projection.yield_table())</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <section class="species">
+        <div class="container">
+            <h2 class="section-title">Supported Species</h2>
+            <div class="species-grid">
+                <div class="species-card">
+                    <h4>Loblolly Pine</h4>
+                    <p class="scientific">Pinus taeda</p>
+                </div>
+                <div class="species-card">
+                    <h4>Longleaf Pine</h4>
+                    <p class="scientific">Pinus palustris</p>
+                </div>
+                <div class="species-card">
+                    <h4>Slash Pine</h4>
+                    <p class="scientific">Pinus elliottii</p>
+                </div>
+                <div class="species-card">
+                    <h4>Shortleaf Pine</h4>
+                    <p class="scientific">Pinus echinata</p>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 2rem; color: #6b7280;">
+                Additional species models for hardwoods and western conifers in development.
+            </p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>pyFVS is part of the <a href="https://fiatools.org/">FIAtools</a> ecosystem</p>
+            <p style="margin-top: 1rem; opacity: 0.7;">
+                <a href="https://github.com/mihiarc/pyfvs">GitHub</a> |
+                <a href="https://pyfvs.fiatools.org">Documentation</a> |
+                <a href="https://fiatools.org/">FIAtools Home</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

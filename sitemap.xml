@@ -7,4 +7,36 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
+
+  <!-- pyFIA landing page -->
+  <url>
+    <loc>https://fiatools.org/tools/pyfia/</loc>
+    <lastmod>2025-12-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- gridFIA landing page -->
+  <url>
+    <loc>https://fiatools.org/tools/gridfia/</loc>
+    <lastmod>2025-12-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- pyFVS landing page -->
+  <url>
+    <loc>https://fiatools.org/tools/pyfvs/</loc>
+    <lastmod>2025-12-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- askFIA landing page -->
+  <url>
+    <loc>https://fiatools.org/tools/askfia/</loc>
+    <lastmod>2025-12-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
 </urlset>

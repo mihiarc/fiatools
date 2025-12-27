@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gridFIA - Gridded Forest Biomass Maps | Spatial Forest Inventory Analysis</title>
+    <meta name="description" content="gridFIA generates high-resolution gridded forest biomass maps from FIA data. Create 30-meter resolution carbon maps, species diversity indices, and spatial forest analytics.">
+    <meta name="keywords" content="forest biomass maps, gridded FIA data, spatial forest analysis, carbon mapping, species diversity, forest raster, 30m resolution, tree species distribution, forest carbon maps">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <link rel="canonical" href="https://fiatools.org/tools/gridfia/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="gridFIA - Gridded Forest Biomass Maps">
+    <meta property="og:description" content="Generate high-resolution gridded forest biomass and carbon maps from FIA survey data.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fiatools.org/tools/gridfia/">
+    <meta property="og:site_name" content="FIAtools">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="gridFIA - Gridded Forest Biomass Maps">
+    <meta name="twitter:description" content="Generate 30m resolution forest biomass and carbon maps from FIA survey data.">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "gridFIA",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Windows, macOS, Linux",
+        "description": "Python library for generating high-resolution gridded forest biomass maps and spatial carbon analytics from USDA FIA survey data",
+        "url": "https://fiatools.org/tools/gridfia/",
+        "downloadUrl": "https://github.com/mihiarc/gridfia",
+        "softwareVersion": "0.1.0",
+        "author": {
+            "@type": "Organization",
+            "name": "FIAtools",
+            "url": "https://fiatools.org"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "30-meter resolution biomass maps",
+            "327 tree species support",
+            "Zarr cloud-optimized storage",
+            "Species diversity indices",
+            "Carbon stock mapping",
+            "Allometric equation library",
+            "Spatial interpolation",
+            "Multi-band raster output"
+        ],
+        "programmingLanguage": "Python"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is gridFIA?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "gridFIA is a Python library that transforms point-based FIA forest inventory data into continuous gridded maps. It generates high-resolution (30m) raster datasets of forest biomass, carbon stocks, and species distributions for spatial analysis and GIS applications."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What resolution are gridFIA maps?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "gridFIA produces 30-meter resolution gridded maps, matching Landsat satellite imagery resolution. This allows seamless integration with remote sensing data for forest monitoring and change detection."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How many tree species does gridFIA support?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "gridFIA includes allometric equations and biomass models for 327 North American tree species, covering the full range of species surveyed by the USDA Forest Service FIA program."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What output formats does gridFIA support?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "gridFIA outputs data in cloud-optimized Zarr format for efficient storage and streaming access. It also supports export to GeoTIFF, NetCDF, and other standard geospatial raster formats."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "FIAtools",
+                "item": "https://fiatools.org/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "gridFIA",
+                "item": "https://fiatools.org/tools/gridfia/"
+            }
+        ]
+    }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #1a1a2e;
+            background: #f8fafc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e4d8c;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #1e4d8c;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1e4d8c 0%, #3b7dd8 100%);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero .tagline {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .hero .description {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+            opacity: 0.85;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #1e4d8c;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            margin-left: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .stats-bar {
+            background: #143a6b;
+            padding: 2rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .stat-item h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            opacity: 0.8;
+        }
+
+        .features {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1e4d8c;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: #1e4d8c;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .feature-card p {
+            color: #4a5568;
+        }
+
+        .code-section {
+            background: #1a1a2e;
+            padding: 5rem 0;
+            color: white;
+        }
+
+        .code-section .section-title {
+            color: white;
+        }
+
+        .code-block {
+            background: #0d0d1a;
+            border-radius: 12px;
+            padding: 2rem;
+            overflow-x: auto;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .code-block pre {
+            font-family: 'Fira Code', 'Monaco', monospace;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .code-block .comment { color: #6b7280; }
+        .code-block .keyword { color: #c792ea; }
+        .code-block .function { color: #82aaff; }
+        .code-block .string { color: #c3e88d; }
+        .code-block .variable { color: #f78c6c; }
+
+        .use-cases {
+            padding: 5rem 0;
+            background: #eef4fb;
+        }
+
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .use-case-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #1e4d8c;
+        }
+
+        .use-case-item h4 {
+            color: #1e4d8c;
+            margin-bottom: 0.5rem;
+        }
+
+        .use-case-item p {
+            color: #4a5568;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: #82aaff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.2rem;
+            }
+
+            .btn-secondary {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="https://fiatools.org/" class="logo">FIAtools</a>
+            <ul class="nav-links">
+                <li><a href="https://fiatools.org/">Home</a></li>
+                <li><a href="https://fiatools.org/tools/pyfia/">pyFIA</a></li>
+                <li><a href="https://fiatools.org/tools/gridfia/">gridFIA</a></li>
+                <li><a href="https://fiatools.org/tools/pyfvs/">pyFVS</a></li>
+                <li><a href="https://fiatools.org/tools/askfia/">askFIA</a></li>
+                <li><a href="https://github.com/mihiarc/gridfia">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1>gridFIA</h1>
+            <p class="tagline">High-Resolution Gridded Forest Biomass Maps</p>
+            <p class="description">
+                Transform FIA point samples into continuous 30-meter resolution raster maps.
+                Generate spatial datasets for carbon mapping, species diversity analysis, and forest monitoring.
+            </p>
+            <a href="https://github.com/mihiarc/gridfia" class="btn btn-primary">View on GitHub</a>
+            <a href="https://gridfia.fiatools.org" class="btn btn-secondary">Documentation</a>
+        </div>
+    </section>
+
+    <section class="stats-bar">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>30m Resolution</h3>
+                    <p>Landsat-Compatible</p>
+                </div>
+                <div class="stat-item">
+                    <h3>327 Species</h3>
+                    <p>Allometric Models</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Zarr Format</h3>
+                    <p>Cloud-Optimized</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Open Source</h3>
+                    <p>MIT Licensed</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>30-Meter Resolution Maps</h3>
+                    <p>Generate gridded biomass and carbon maps at 30m resolution, matching Landsat imagery for seamless remote sensing integration.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>327 Tree Species</h3>
+                    <p>Comprehensive allometric equation library covering all major North American tree species with validated biomass models.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Species Diversity Indices</h3>
+                    <p>Calculate Shannon diversity, Simpson index, and species richness maps for biodiversity assessment and conservation planning.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Cloud-Optimized Storage</h3>
+                    <p>Output data in Zarr format for efficient cloud storage, streaming access, and integration with modern data pipelines.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Spatial Interpolation</h3>
+                    <p>Advanced interpolation methods to generate continuous surfaces from sparse FIA plot data with uncertainty quantification.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Multi-Band Rasters</h3>
+                    <p>Create multi-band raster stacks with biomass, carbon, species counts, and diversity metrics in a single dataset.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="code-section">
+        <div class="container">
+            <h2 class="section-title">Quick Start</h2>
+            <div class="code-block">
+                <pre><code><span class="comment"># Install gridFIA</span>
+<span class="variable">pip install gridfia</span>
+
+<span class="comment"># Import and create biomass maps</span>
+<span class="keyword">from</span> gridfia <span class="keyword">import</span> GridFIA
+
+<span class="comment"># Initialize with FIA data</span>
+grid = <span class="function">GridFIA</span>(state=<span class="string">"NC"</span>)
+
+<span class="comment"># Generate 30m biomass raster</span>
+biomass_map = grid.<span class="function">create_biomass_grid</span>(
+    resolution=<span class="variable">30</span>,
+    output_format=<span class="string">"zarr"</span>
+)
+
+<span class="comment"># Calculate species diversity</span>
+diversity = grid.<span class="function">calculate_diversity</span>(
+    index=<span class="string">"shannon"</span>
+)
+
+<span class="comment"># Export to GeoTIFF</span>
+grid.<span class="function">export_geotiff</span>(<span class="string">"nc_biomass.tif"</span>)</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <section class="use-cases">
+        <div class="container">
+            <h2 class="section-title">Use Cases</h2>
+            <div class="use-cases-grid">
+                <div class="use-case-item">
+                    <h4>Carbon Stock Mapping</h4>
+                    <p>Create wall-to-wall carbon stock maps for carbon accounting, offset projects, and climate mitigation planning.</p>
+                </div>
+                <div class="use-case-item">
+                    <h4>Biodiversity Assessment</h4>
+                    <p>Map species diversity patterns to identify biodiversity hotspots and prioritize conservation areas.</p>
+                </div>
+                <div class="use-case-item">
+                    <h4>Remote Sensing Fusion</h4>
+                    <p>Combine FIA-derived maps with satellite imagery for enhanced forest monitoring and change detection.</p>
+                </div>
+                <div class="use-case-item">
+                    <h4>Timber Inventory</h4>
+                    <p>Generate spatial timber volume estimates for forest management planning and harvest scheduling.</p>
+                </div>
+                <div class="use-case-item">
+                    <h4>Wildfire Risk Modeling</h4>
+                    <p>Map fuel loads and forest structure to support wildfire risk assessment and mitigation strategies.</p>
+                </div>
+                <div class="use-case-item">
+                    <h4>Ecosystem Services</h4>
+                    <p>Quantify and map ecosystem services including carbon sequestration, water yield, and habitat provision.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>gridFIA is part of the <a href="https://fiatools.org/">FIAtools</a> ecosystem</p>
+            <p style="margin-top: 1rem; opacity: 0.7;">
+                <a href="https://github.com/mihiarc/gridfia">GitHub</a> |
+                <a href="https://gridfia.fiatools.org">Documentation</a> |
+                <a href="https://fiatools.org/">FIAtools Home</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

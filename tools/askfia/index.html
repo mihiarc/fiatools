@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>askFIA - AI-Powered Forest Data Explorer | Natural Language FIA Queries</title>
+    <meta name="description" content="askFIA uses AI to answer forest inventory questions in plain English. Query FIA data naturally - ask about timber volumes, carbon stocks, and forest statistics without SQL.">
+    <meta name="keywords" content="forest data AI, natural language FIA, forest inventory chatbot, AI forest analysis, forest data query, conversational analytics, LLM forestry, forest statistics assistant">
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <link rel="canonical" href="https://fiatools.org/tools/askfia/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="askFIA - AI-Powered Forest Data Explorer">
+    <meta property="og:description" content="Query FIA forest inventory data using natural language. Ask questions about timber, carbon, and forest statistics.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fiatools.org/tools/askfia/">
+    <meta property="og:site_name" content="FIAtools">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="askFIA - AI-Powered Forest Data Explorer">
+    <meta name="twitter:description" content="Query FIA forest inventory data using natural language questions.">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "askFIA",
+        "applicationCategory": "WebApplication",
+        "operatingSystem": "Any",
+        "description": "AI-powered natural language interface for querying USDA Forest Service FIA data without SQL or programming knowledge",
+        "url": "https://fiatools.org/tools/askfia/",
+        "downloadUrl": "https://github.com/mihiarc/askfia",
+        "softwareVersion": "0.1.0",
+        "author": {
+            "@type": "Organization",
+            "name": "FIAtools",
+            "url": "https://fiatools.org"
+        },
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "Natural language queries",
+            "AI-powered data interpretation",
+            "No SQL required",
+            "Plain English answers",
+            "Forest statistics lookup",
+            "Carbon and biomass queries",
+            "State and county filtering",
+            "Conversational interface"
+        ],
+        "programmingLanguage": "Python"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is askFIA?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "askFIA is an AI-powered tool that lets you query USDA Forest Service FIA data using natural language. Instead of writing SQL or code, you can ask questions like 'How much timber volume is in North Carolina?' and get plain English answers."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Do I need programming skills to use askFIA?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. askFIA is designed for users without programming or SQL experience. You simply type questions in plain English, and the AI interprets your query, retrieves the data, and provides an easy-to-understand response."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What questions can I ask askFIA?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "You can ask about timber volumes, forest area, carbon stocks, tree counts, species distributions, and more. Examples include: 'What is the total forest area in California?', 'How many oak trees are in Texas?', or 'What is the carbon stock in New England forests?'"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is askFIA accurate?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "askFIA retrieves data directly from the official USDA FIA database and uses AI to interpret your questions and format responses. The underlying data is the same authoritative forest inventory data used by researchers and policymakers."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "FIAtools",
+                "item": "https://fiatools.org/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "askFIA",
+                "item": "https://fiatools.org/tools/askfia/"
+            }
+        ]
+    }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #1a1a2e;
+            background: #f8fafc;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #6b21a8;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #6b21a8;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #6b21a8 0%, #9333ea 100%);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero .tagline {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .hero .description {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+            opacity: 0.85;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #6b21a8;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            margin-left: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .stats-bar {
+            background: #4c1d7a;
+            padding: 2rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .stat-item h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            opacity: 0.8;
+        }
+
+        .demo-section {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #6b21a8;
+        }
+
+        .chat-demo {
+            max-width: 700px;
+            margin: 0 auto;
+            background: #f8fafc;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .chat-message {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-message.user {
+            align-items: flex-end;
+        }
+
+        .chat-message.ai {
+            align-items: flex-start;
+        }
+
+        .message-bubble {
+            max-width: 85%;
+            padding: 1rem 1.5rem;
+            border-radius: 16px;
+            font-size: 1rem;
+        }
+
+        .user .message-bubble {
+            background: #6b21a8;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .ai .message-bubble {
+            background: white;
+            color: #1a1a2e;
+            border: 1px solid #e2e8f0;
+            border-bottom-left-radius: 4px;
+        }
+
+        .message-label {
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .features {
+            padding: 5rem 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: #6b21a8;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .feature-card p {
+            color: #4a5568;
+        }
+
+        .examples {
+            padding: 5rem 0;
+            background: #faf5ff;
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .example-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #6b21a8;
+        }
+
+        .example-card .question {
+            font-weight: 600;
+            color: #6b21a8;
+            margin-bottom: 0.5rem;
+        }
+
+        .example-card .category {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: #82aaff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .tagline {
+                font-size: 1.2rem;
+            }
+
+            .btn-secondary {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="https://fiatools.org/" class="logo">FIAtools</a>
+            <ul class="nav-links">
+                <li><a href="https://fiatools.org/">Home</a></li>
+                <li><a href="https://fiatools.org/tools/pyfia/">pyFIA</a></li>
+                <li><a href="https://fiatools.org/tools/gridfia/">gridFIA</a></li>
+                <li><a href="https://fiatools.org/tools/pyfvs/">pyFVS</a></li>
+                <li><a href="https://fiatools.org/tools/askfia/">askFIA</a></li>
+                <li><a href="https://github.com/mihiarc/askfia">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1>askFIA</h1>
+            <p class="tagline">AI-Powered Forest Data Explorer</p>
+            <p class="description">
+                Query USDA Forest Inventory data using natural language.
+                No SQL or programming required - just ask your question and get instant answers.
+            </p>
+            <a href="https://github.com/mihiarc/askfia" class="btn btn-primary">View on GitHub</a>
+            <a href="https://askfia.fiatools.org" class="btn btn-secondary">Try askFIA</a>
+        </div>
+    </section>
+
+    <section class="stats-bar">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3>Natural Language</h3>
+                    <p>Plain English Queries</p>
+                </div>
+                <div class="stat-item">
+                    <h3>No Code Required</h3>
+                    <p>For Everyone</p>
+                </div>
+                <div class="stat-item">
+                    <h3>FIA Database</h3>
+                    <p>Official USDA Data</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Open Source</h3>
+                    <p>MIT Licensed</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="demo-section">
+        <div class="container">
+            <h2 class="section-title">See It In Action</h2>
+            <div class="chat-demo">
+                <div class="chat-message user">
+                    <span class="message-label">You</span>
+                    <div class="message-bubble">
+                        How much timber volume is in North Carolina's forests?
+                    </div>
+                </div>
+                <div class="chat-message ai">
+                    <span class="message-label">askFIA</span>
+                    <div class="message-bubble">
+                        Based on the latest FIA survey data, North Carolina has approximately <strong>45.2 billion cubic feet</strong> of net timber volume across all forest land. This includes 18.5 billion cubic feet of softwood species (primarily loblolly and longleaf pine) and 26.7 billion cubic feet of hardwood species.
+                    </div>
+                </div>
+                <div class="chat-message user">
+                    <span class="message-label">You</span>
+                    <div class="message-bubble">
+                        What about just the oak species?
+                    </div>
+                </div>
+                <div class="chat-message ai">
+                    <span class="message-label">askFIA</span>
+                    <div class="message-bubble">
+                        Oak species in North Carolina account for <strong>8.3 billion cubic feet</strong> of timber volume. The most common species are white oak (2.1B ft³), red oak (1.9B ft³), and chestnut oak (1.4B ft³).
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Natural Language Interface</h3>
+                    <p>Ask questions the way you naturally would. No need to learn query syntax, database schemas, or programming languages.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Conversational Context</h3>
+                    <p>Follow up on previous questions without restating everything. askFIA remembers the context of your conversation.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Plain English Answers</h3>
+                    <p>Get responses in clear, understandable language with relevant context and units of measurement.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Official FIA Data</h3>
+                    <p>All answers come from the authoritative USDA Forest Service Forest Inventory and Analysis database.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Multi-Metric Queries</h3>
+                    <p>Ask about volume, carbon, biomass, area, tree counts, and more in a single conversation.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Geographic Filtering</h3>
+                    <p>Focus on specific states, counties, or regions. Compare data across different geographic areas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="examples">
+        <div class="container">
+            <h2 class="section-title">Example Questions</h2>
+            <div class="examples-grid">
+                <div class="example-card">
+                    <p class="question">"What is the total forest area in California?"</p>
+                    <p class="category">Forest Area</p>
+                </div>
+                <div class="example-card">
+                    <p class="question">"How many live trees are there in Texas?"</p>
+                    <p class="category">Tree Counts</p>
+                </div>
+                <div class="example-card">
+                    <p class="question">"What is the carbon stock in New England forests?"</p>
+                    <p class="category">Carbon & Biomass</p>
+                </div>
+                <div class="example-card">
+                    <p class="question">"Which state has the most timber volume?"</p>
+                    <p class="category">Comparisons</p>
+                </div>
+                <div class="example-card">
+                    <p class="question">"How has forest area in Oregon changed since 2010?"</p>
+                    <p class="category">Trends</p>
+                </div>
+                <div class="example-card">
+                    <p class="question">"What are the most common tree species in Florida?"</p>
+                    <p class="category">Species Distribution</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>askFIA is part of the <a href="https://fiatools.org/">FIAtools</a> ecosystem</p>
+            <p style="margin-top: 1rem; opacity: 0.7;">
+                <a href="https://github.com/mihiarc/askfia">GitHub</a> |
+                <a href="https://askfia.fiatools.org">Try askFIA</a> |
+                <a href="https://fiatools.org/">FIAtools Home</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
