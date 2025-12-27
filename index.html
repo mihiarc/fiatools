@@ -286,10 +286,10 @@
     .tool-card.askfia::before { background: linear-gradient(90deg, var(--askfia), var(--askfia-light)); }
 
     .tool-icon {
-      width: 140px;
-      height: 140px;
+      width: 180px;
+      height: 180px;
       margin-bottom: 1.5rem;
-      padding: 0.5rem;
+      padding: 0.25rem;
     }
 
     .tool-icon img {
@@ -326,6 +326,7 @@
       list-style: none;
       margin-bottom: 1.5rem;
       width: 100%;
+      flex-grow: 1;
     }
 
     .tool-features li {
@@ -363,7 +364,22 @@
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
-    
+
+    .tool-text-link {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--gray);
+      text-decoration: none;
+      display: block;
+      margin-top: 0.75rem;
+      transition: color 0.2s ease;
+    }
+
+    .tool-text-link:hover {
+      color: var(--askfia);
+      text-decoration: underline;
+    }
+
     /* Workflow Section */
     .workflow-section {
       padding: 8rem 4rem;
@@ -765,7 +781,7 @@
           <li>Report generation</li>
         </ul>
         <a href="https://askfia.netlify.app" class="tool-link">Try askFIA →</a>
-        <a href="https://github.com/mihiarc/askfia" class="tool-link" style="background: transparent; color: var(--askfia); border: 1px solid var(--askfia); margin-top: 0.5rem;">View repository →</a>
+        <a href="https://github.com/mihiarc/askfia" class="tool-text-link">View repository →</a>
       </div>
     </div>
   </section>
