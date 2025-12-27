@@ -395,7 +395,7 @@
       position: relative;
       width: 100%;
       max-width: 800px;
-      height: 420px;
+      height: 480px;
       margin: 0 auto;
     }
 
@@ -409,15 +409,15 @@
     }
 
     .workflow-connections line {
-      stroke: rgba(0, 0, 0, 0.12);
-      stroke-width: 2;
+      stroke: rgba(0, 0, 0, 0.2);
+      stroke-width: 2.5;
     }
 
-    .workflow-connections line.data-flow {
+    .workflow-connections .data-flow {
       stroke: var(--pyfia);
       stroke-width: 2.5;
       stroke-dasharray: 8, 5;
-      opacity: 0.7;
+      opacity: 0.8;
     }
 
     .workflow-node {
@@ -427,22 +427,22 @@
     }
 
     .workflow-node.center {
-      top: 50%;
+      top: 42%;
       left: 50%;
     }
 
     .workflow-node.left {
-      top: 25%;
-      left: 15%;
+      top: 22%;
+      left: 18%;
     }
 
     .workflow-node.right {
-      top: 25%;
-      left: 85%;
+      top: 22%;
+      left: 82%;
     }
 
     .workflow-node.bottom {
-      top: 85%;
+      top: 82%;
       left: 50%;
     }
 
@@ -932,13 +932,13 @@
 
     <div class="workflow-hub">
       <!-- SVG connections -->
-      <svg class="workflow-connections" viewBox="0 0 800 420" preserveAspectRatio="xMidYMid meet">
+      <svg class="workflow-connections" viewBox="0 0 800 480" preserveAspectRatio="xMidYMid meet">
         <!-- Lines from outer nodes to center (askFIA) -->
-        <line x1="120" y1="105" x2="330" y2="190" />
-        <line x1="680" y1="105" x2="470" y2="190" />
-        <line x1="400" y1="357" x2="400" y2="275" />
-        <!-- Data flow line: pyFIA to pyFVS -->
-        <line class="data-flow" x1="160" y1="130" x2="640" y2="130" />
+        <line x1="185" y1="135" x2="330" y2="175" />
+        <line x1="615" y1="135" x2="470" y2="175" />
+        <line x1="400" y1="350" x2="400" y2="260" />
+        <!-- Data flow curve: pyFIA to pyFVS (arcs above center) -->
+        <path class="data-flow" d="M 195 85 Q 400 0 605 85" fill="none" />
       </svg>
 
       <!-- Center: askFIA (hub) -->
@@ -947,7 +947,7 @@
           <img src="logos/askfia_logo.png" alt="askFIA logo">
         </div>
         <div class="node-label">askFIA</div>
-        <div class="node-desc">AI orchestration layer</div>
+        <div class="node-desc">AI orchestration</div>
       </div>
 
       <!-- Left: pyFIA -->
