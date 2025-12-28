@@ -44,7 +44,10 @@
       "Bash(git restore:*)",
       "WebFetch(domain:pypi.org)",
       "Bash(uv run python:*)",
-      "Bash(uv run twine upload:*)"
+      "Bash(uv run twine upload:*)",
+      "Bash(pip index:*)",
+      "Bash(pip show:*)",
+      "Bash(python3:*)"
     ]
   }
 }
