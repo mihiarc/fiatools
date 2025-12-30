@@ -2,7 +2,7 @@
 
 ## Overview
 
-FIAtools is a Python ecosystem for forest inventory analysis. The brand identity reflects professionalism, scientific rigor, and the natural domain of forestry research while maintaining modern, technical appeal.
+FIAtools is a Python ecosystem for forest inventory applications. The brand identity reflects professionalism, scientific rigor, and the natural domain of forestry research while maintaining modern, technical appeal.
 
 ---
 

@@ -6,7 +6,7 @@ If you use multiple FIAtools packages in your research, you may cite the ecosyst
 
 ```bibtex
 @software{fiatools2025,
-  title = {FIAtools: A Python Ecosystem for Forest Inventory Analysis},
+  title = {FIAtools: A Python Ecosystem for Forest Inventory Applications},
   author = {Mihiar, Christopher},
   year = {2025},
   url = {https://github.com/mihiarc},
@@ -20,7 +20,7 @@ If you use multiple FIAtools packages in your research, you may cite the ecosyst
 
 ```bibtex
 @software{pyfia2024,
-  title = {pyFIA: A Python Library for Forest Inventory Analysis},
+  title = {pyFIA: A Python Library for Forest Inventory Applications},
   author = {Mihiar, Christopher},
   year = {2024},
   url = {https://github.com/mihiarc/pyfia},

@@ -3,7 +3,7 @@
   
   <h1>FIAtools</h1>
   
-  <p><strong>Python ecosystem for forest inventory analysis</strong></p>
+  <p><strong>Python ecosystem for forest inventory applications</strong></p>
   
   <p>
     <a href="https://fiatools.org"><img src="https://img.shields.io/badge/website-fiatools.org-2D5016" alt="Website"></a>
@@ -14,6 +14,10 @@
 ---
 
 FIAtools is a unified Python ecosystem for working with USDA Forest Service Forest Inventory and Analysis (FIA) data. From raw survey plots to growth projections to spatial analysis—all with consistent interfaces and proper statistical methods.
+
+## Affiliation
+
+Developed in collaboration with USDA Forest Service Research & Development. These tools provide programmatic access to Forest Inventory and Analysis (FIA) data but are not part of the official FIA Program.
 
 <div align="center">
   <table>
@@ -184,7 +188,7 @@ fiatools/
 
 ```bibtex
 @software{fiatools2025,
-  title = {FIAtools: A Python Ecosystem for Forest Inventory Analysis},
+  title = {FIAtools: A Python Ecosystem for Forest Inventory Applications},
   author = {Mihiar, Christopher},
   year = {2025},
   url = {https://fiatools.org}
