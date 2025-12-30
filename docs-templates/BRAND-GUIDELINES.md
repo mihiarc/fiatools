@@ -6,6 +6,89 @@ FIAtools is a Python ecosystem for forest inventory applications. The brand iden
 
 ---
 
+## Naming Strategy & Rationale
+
+### The Name "FIAtools"
+
+**FIA** in "FIAtools" stands for **Forest Inventory Applications** — a deliberate choice to differentiate from the official USDA program.
+
+| Term | Meaning | When to Use |
+|------|---------|-------------|
+| **Forest Inventory Applications** | Our ecosystem of tools | Describing FIAtools, pyFIA, etc. |
+| **Forest Inventory and Analysis (FIA)** | The official USDA program | Referring to the data source or program |
+
+### Why This Matters
+
+The USDA Forest Service operates the **Forest Inventory and Analysis (FIA) Program** — a congressionally mandated initiative that has collected forest data since 1930. To avoid confusion:
+
+1. **We are not the FIA Program** — We build tools that work with FIA data
+2. **We are affiliated with Forest Service R&D** — The research branch that includes FIA
+3. **"Applications" vs "Analysis"** — This follows the pattern established by [FIESTA](https://github.com/USDAForestService/FIESTA) (Forest Inventory **ESTimation** and Analysis), another R&D tool
+
+### Correct Usage Examples
+
+**Describing the tools (use "Applications"):**
+- ✓ "FIAtools: Python Ecosystem for Forest Inventory Applications"
+- ✓ "pyFIA: A Python Library for Forest Inventory Applications"
+- ✓ "Open-source tools for forest inventory applications"
+
+**Describing the data source (use "and Analysis"):**
+- ✓ "Access Forest Inventory and Analysis (FIA) data programmatically"
+- ✓ "Query the FIA database using Python"
+- ✓ "Built on USDA Forest Inventory and Analysis data"
+
+**Incorrect usage:**
+- ✗ "FIAtools: Python Ecosystem for Forest Inventory Analysis" (confuses with official program)
+- ✗ "The official FIA Python library" (implies official status we don't have)
+- ✗ "USDA FIA Tools" (implies official USDA product)
+
+---
+
+## Affiliation Statement
+
+All major documentation (READMEs, documentation sites, about pages) must include an affiliation statement:
+
+### Standard Affiliation Block
+
+```markdown
+## Affiliation
+
+Developed in collaboration with USDA Forest Service Research & Development.
+[Tool name] provides programmatic access to Forest Inventory and Analysis (FIA)
+data but is not part of the official FIA Program.
+```
+
+### Tool-Specific Variations
+
+| Tool | Affiliation Statement |
+|------|----------------------|
+| **FIAtools** (ecosystem) | "These tools provide programmatic access to Forest Inventory and Analysis (FIA) data but are not part of the official FIA Program." |
+| **pyFIA** | "pyFIA provides programmatic access to Forest Inventory and Analysis (FIA) data but is not part of the official FIA Program." |
+| **gridFIA** | "gridFIA provides access to Forest Service spatial data products but is not part of the official FIA Program." |
+| **pyFVS** | "pyFVS is a Python implementation of the Forest Vegetation Simulator and is part of the FIA Python Ecosystem." |
+| **askFIA** | "askFIA provides an AI-powered interface to Forest Inventory and Analysis (FIA) data but is not part of the official FIA Program." |
+
+---
+
+## Taglines
+
+### Primary Tagline
+> **"Open-source Python tools for FIA data"**
+
+### Ecosystem Tagline
+> **"Python Ecosystem for Forest Inventory Applications"**
+
+### Individual Tool Taglines
+
+| Tool | Tagline |
+|------|---------|
+| **pyFIA** | "The Python API for forest inventory data" |
+| **gridFIA** | "Spatial raster analysis for forest biomass" |
+| **pyFVS** | "Forest growth modeling in Python" |
+| **askFIA** | "Ask questions, get forest answers" |
+
+---
+
 ## Brand Architecture
 
 ### Umbrella Brand
@@ -20,6 +103,21 @@ Each tool maintains its own identity while sharing common design language:
 | **gridFIA** | Blue-Green | Spatial analysis | "Spatial raster analysis for forest biomass" |
 | **pyFVS** | Amber/Gold | Growth simulation | "Forest growth modeling in Python" |
 | **askFIA** | Teal | AI interface | "Ask questions, get forest answers" |
+
+---
+
+## Related Official Tools
+
+For context, these are official USDA Forest Service tools that work with FIA data:
+
+| Tool | Full Name | Source | Language |
+|------|-----------|--------|----------|
+| **FIESTA** | Forest Inventory ESTimation and Analysis | USDA FS R&D | R |
+| **rFIA** | R package for FIA database | Academic (validated by FS) | R |
+| **FVS** | Forest Vegetation Simulator | USDA FS | Fortran |
+| **EVALIDator** | FIA web query tool | USDA FIA Program | Web |
+
+FIAtools complements these by providing a Python-native ecosystem.
 
 ---
 
@@ -141,18 +239,24 @@ Maintain minimum clear space equal to the height of the "F" in FIAtools around a
 - Be specific about capabilities and limitations
 - Include code examples
 - Reference scientific methodology
+- Clearly distinguish tools from data sources
 
 **Don't:**
 - Oversell or use marketing hyperbole
 - Assume users know FIA database structure
 - Skip over statistical methodology details
 - Use jargon without explanation
+- Imply official USDA endorsement
 
 ### Example Copy
 
 ✓ "pyFIA calculates post-stratified estimates following Bechtold & Patterson (2005), producing results statistically compatible with EVALIDator."
 
+✓ "Access USDA Forest Inventory and Analysis data through a clean Python API."
+
 ✗ "pyFIA is the ultimate solution for all your forest data needs!"
+
+✗ "The official Python library for FIA data analysis."
 
 ---
 
@@ -191,14 +295,14 @@ Maintain minimum clear space equal to the height of the "F" in FIAtools around a
 ```markdown
 <div align="center">
   <img src="logo.svg" alt="pyFIA" width="120">
-  
+
   # pyFIA
-  
+
   **The Python API for forest inventory data**
-  
+
   [badges]
-  
-  <sub>Part of the **FIAtools** ecosystem</sub>
+
+  <sub>Part of the **FIAtools** ecosystem — Python tools for Forest Inventory Applications</sub>
 </div>
 ```
 
@@ -207,18 +311,44 @@ Maintain minimum clear space equal to the height of the "F" in FIAtools around a
 - Sidebar navigation with tool colors
 - Code blocks with syntax highlighting
 - Collapsible sections for detailed methodology
+- Affiliation statement in footer or about page
 
 ### Conference Poster
 
 - Large tree ring visualization as focal point
 - Four-column layout for tool overview
 - QR code to GitHub/documentation
+- Clear affiliation statement with USDA FS R&D
 
 ### Slide Deck
 
 - Title slide: Full ecosystem logo, subtitle
 - Section dividers: Tool color backgrounds
 - Content slides: Minimal, code-focused
+- Closing slide: Affiliation and contact info
+
+---
+
+## Citation Guidelines
+
+### Ecosystem Citation
+
+```bibtex
+@software{fiatools,
+  author = {Mihiar, Chris},
+  title = {FIAtools: A Python Ecosystem for Forest Inventory Applications},
+  year = {2025},
+  url = {https://fiatools.org}
+}
+```
+
+### Individual Tool Citations
+
+Use "Forest Inventory Applications" in tool titles:
+- "pyFIA: A Python Library for Forest Inventory Applications"
+- "gridFIA: Spatial Analysis for Forest Inventory Applications"
+
+See [CITATION-GUIDE.md](./CITATION-GUIDE.md) for complete citation formats.
 
 ---
 
@@ -238,10 +368,22 @@ Provide in:
 
 ---
 
+## Quick Reference Card
+
+| Element | Correct | Incorrect |
+|---------|---------|-----------|
+| Ecosystem name | FIAtools | FIA Tools, FIA-tools |
+| Expansion | Forest Inventory Applications | Forest Inventory Analysis |
+| Data source | Forest Inventory and Analysis (FIA) | Forest Inventory Analysis |
+| Tool names | pyFIA, gridFIA, pyFVS, askFIA | PyFIA, PYFIA, GridFia |
+| Affiliation | "Developed in collaboration with USDA FS R&D" | "Official USDA tool" |
+
+---
+
 ## Contact
 
 For brand questions or asset requests:
 
-**Chris Mihiar**  
-chris.mihiar@usda.gov  
+**Chris Mihiar**
+chris.mihiar@usda.gov
 github.com/mihiarc
